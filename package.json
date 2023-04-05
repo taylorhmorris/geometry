@@ -1,0 +1,36 @@
+{
+  "name": "@taylorhmorris/geometry",
+  "version": "0.0.1",
+  "description": "A simple geometry package",
+  "main": "lib/index.js",
+  "type": "module",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "lint": "eslint",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-42:tmorris42/geometry.git"
+  },
+  "author": "Taylor H. Morris",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.3",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}

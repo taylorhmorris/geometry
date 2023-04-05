@@ -1,0 +1,298 @@
+import { test, describe, expect } from 'vitest';
+
+import { Rect } from '../Rect.class';
+import { Vector } from '../Vector.class';
+import { Face } from '../Face.enum';
+
+test('creates', () => {
+  const rect = new Rect(5, 10, 15, 20);
+  expect(rect).toBeDefined();
+  expect(rect.x).toBe(5);
+  expect(rect.y).toBe(10);
+  expect(rect.width).toBe(15);
+  expect(rect.height).toBe(20);
+  expect(rect.left).toBe(5 - 15 / 2);
+  expect(rect.top).toBe(0);
+  expect(rect.right).toBe(12.5);
+  expect(rect.bottom).toBe(20);
+  expect(rect.center).toEqual([5, 10]);
+  expect(rect.position).toEqual([5, 10]);
+});
+
+describe('from', () => {
+  test('moves and resizes', () => {
+    const first = new Rect(2, 8, 10, 25);
+    const second = new Rect(4, 5, 2, 2);
+    expect(second.x).toBe(4);
+    expect(second.y).toBe(5);
+    expect(second.width).toBe(2);
+    expect(second.height).toBe(2);
+    second.from(first);
+    expect(second.x).toBe(2);
+    expect(second.y).toBe(8);
+    expect(second.width).toBe(10);
+    expect(second.height).toBe(25);
+    second.x += 2;
+    expect(second.x).toBe(4);
+    expect(first.x).toBe(2);
+  });
+});
+
+describe('moves', () => {
+  test('by x', () => {
+    const rect = new Rect(5, 10, 15, 20);
+    rect.x += 5;
+    expect(rect.x).toBe(10);
+    expect(rect.y).toBe(10);
+    expect(rect.width).toBe(15);
+    expect(rect.height).toBe(20);
+  });
+  test('by y', () => {
+    const rect = new Rect(5, 10, 15, 20);
+    rect.y += 7;
+    expect(rect.x).toBe(5);
+    expect(rect.y).toBe(17);
+    expect(rect.width).toBe(15);
+    expect(rect.height).toBe(20);
+  });
+  test('by bottom', () => {
+    const rect = new Rect(5, 10, 15, 20);
+    rect.bottom = 2;
+    expect(rect.x).toBe(5);
+    expect(rect.y).toBe(-8);
+    expect(rect.width).toBe(15);
+    expect(rect.height).toBe(20);
+  });
+  test('by top', () => {
+    const rect = new Rect(5, 10, 15, 20);
+    rect.top = 1;
+    expect(rect.x).toBe(5);
+    expect(rect.y).toBe(11);
+    expect(rect.width).toBe(15);
+    expect(rect.height).toBe(20);
+  });
+  test('by left', () => {
+    const rect = new Rect(5, 10, 10, 20);
+    rect.left = 2;
+    expect(rect.x).toBe(7);
+  });
+  test('by right', () => {
+    const rect = new Rect(5, 10, 10, 20);
+    rect.right = 11;
+    expect(rect.x).toBe(6);
+    expect(rect.right).toBe(11);
+
+    const rect2 = new Rect(10, 15, 2, 4);
+    rect2.right = 9;
+    expect(rect2.right).toBe(9);
+  });
+});
+
+test('grows', () => {
+  const rect = new Rect(5, 10, 15, 20);
+  rect.width += 5;
+  expect(rect.x).toBe(5);
+  expect(rect.y).toBe(10);
+  expect(rect.width).toBe(20);
+  expect(rect.height).toBe(20);
+  rect.height += 7;
+  expect(rect.x).toBe(5);
+  expect(rect.y).toBe(10);
+  expect(rect.width).toBe(20);
+  expect(rect.height).toBe(27);
+});
+
+describe('collisions', () => {
+  const rect = new Rect(10, 15, 2, 4);
+  test('x', () => {
+    expect(rect.collideX(1)).toBe(false);
+    expect(rect.collideX(8.9)).toBe(false);
+    expect(rect.collideX(9)).toBe(true);
+    expect(rect.collideX(10)).toBe(true);
+    expect(rect.collideX(11)).toBe(true);
+    expect(rect.collideX(11.1)).toBe(false);
+  });
+
+  test('y', () => {
+    expect(rect.collideY(1)).toBe(false);
+    expect(rect.collideY(12.9)).toBe(false);
+    expect(rect.collideY(13)).toBe(true);
+    expect(rect.collideY(14)).toBe(true);
+    expect(rect.collideY(15)).toBe(true);
+    expect(rect.collideY(16)).toBe(true);
+    expect(rect.collideY(17)).toBe(true);
+    expect(rect.collideY(17.1)).toBe(false);
+  });
+
+  test('xy', () => {
+    expect(rect.collideXY(1, 1)).toBe(false);
+    expect(rect.collideXY(1, 12.9)).toBe(false);
+    expect(rect.collideXY(11, 13)).toBe(true);
+    expect(rect.collideXY(10, 17)).toBe(true);
+    expect(rect.collideXY(11, 100)).toBe(false);
+    expect(rect.collideXY(50, 80)).toBe(false);
+    expect(rect.collideXY(1, 80)).toBe(false);
+    expect(rect.collideXY(50, 2)).toBe(false);
+  });
+
+  test('rect', () => {
+    const rect2 = new Rect(10, 15, 2, 4);
+    expect(rect.collideRect(rect2)).toBe(true);
+    rect2.right = rect.left;
+    expect(rect.collideRect(rect2)).toBe(false);
+    rect2.right -= 0.1;
+    expect(rect.collideRect(rect2)).toBe(false);
+  });
+});
+
+describe('alignTo', () => {
+  test('avoids collision', () => {
+    const rect1 = new Rect(10, 15, 2, 4);
+    const rect2 = new Rect(10, 15, 2, 4);
+    rect2.alignTo(rect1, [1, 0]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    rect2.alignTo(rect1, [-1, 0]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    rect2.alignTo(rect1, [0, -1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    rect2.alignTo(rect1, [0, 1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+  });
+});
+
+describe('alignToFace', () => {
+  test('avoids collision', () => {
+    const rect1 = new Rect(7, 8, 4, 5);
+    const rect2 = new Rect(1, 2, 3, 4);
+    rect2.alignToFace(rect1, Face.NONE);
+    expect(rect2.position).toEqual([1, 2]);
+    rect2.alignToFace(rect1, Face.TOP);
+    expect(rect2.bottom).toEqual(rect1.top);
+    rect2.alignToFace(rect1, Face.BOTTOM);
+    expect(rect2.top).toEqual(rect1.bottom);
+    rect2.alignToFace(rect1, Face.LEFT);
+    expect(rect2.right).toEqual(rect1.left);
+    rect2.alignToFace(rect1, Face.RIGHT);
+    expect(rect2.left).toEqual(rect1.right);
+  });
+});
+
+describe('collisionFace', () => {
+  test('no vector', () => {
+    const rect1 = new Rect(15, 10, 2, 4);
+    const rect2 = new Rect(15, 15, 2, 4);
+    const moveVector = new Vector(0, 0);
+    expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.NONE);
+  });
+  describe('single axis', () => {
+    test('from TOP', () => {
+      const rect1 = new Rect(15, 10, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(0, 10);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.TOP);
+    });
+    test('from BOTTOM', () => {
+      const rect1 = new Rect(15, 10, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(0, -10);
+      expect(rect1.collisionFace(rect2, moveVector)).toBe(Face.BOTTOM);
+    });
+    test('from RIGHT', () => {
+      const rect1 = new Rect(10, 15, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(-10, 0);
+      expect(rect1.collisionFace(rect2, moveVector)).toBe(Face.RIGHT);
+    });
+    test('from LEFT', () => {
+      const rect1 = new Rect(10, 15, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(10, 0);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.LEFT);
+    });
+    test('touching LEFT moving BOTTOM', () => {
+      const rect1 = new Rect(13, 15, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(0, 1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.LEFT);
+    });
+    test('inside moving RIGHT', () => {
+      const player = new Rect(15, 15, 2, 2);
+      const tile = new Rect(15, 15, 4, 4);
+      const moveVector = new Vector(1, 0);
+      expect(tile.collisionFace(player, moveVector)).toBe(Face.NONE);
+    });
+  });
+
+  describe('double axis', () => {
+    test('from TOPTOPLEFT', () => {
+      const rect1 = new Rect(14, 10, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(1, 1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.TOP);
+    });
+    test('from LEFTTOPLEFT', () => {
+      const rect1 = new Rect(10, 14, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(1, 1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.LEFT);
+    });
+    test('from LEFTBOTTOMLEFT', () => {
+      const rect1 = new Rect(10, 16, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(1, -1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.LEFT);
+    });
+    test('from BOTTOMBOTTOMLEFT', () => {
+      const rect1 = new Rect(14, 20, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(1, -1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.BOTTOM);
+    });
+    test('from TOPTOPRIGHT', () => {
+      const rect1 = new Rect(16, 10, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(-1, 1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.TOP);
+    });
+    test('from RIGHTTOPRIGHT', () => {
+      const rect1 = new Rect(20, 14, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(-1, 1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.RIGHT);
+    });
+    test('from RIGHTBOTTOMRIGHT', () => {
+      const rect1 = new Rect(20, 16, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(-1, -1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.RIGHT);
+    });
+    test('from BOTTOMBOTTOMRIGHT', () => {
+      const rect1 = new Rect(16, 20, 2, 4);
+      const rect2 = new Rect(15, 15, 2, 4);
+      const moveVector = new Vector(-1, -1);
+      expect(rect2.collisionFace(rect1, moveVector)).toBe(Face.BOTTOM);
+    });
+  });
+});
+
+describe('RectPA', () => {
+  describe('Copy', () => {
+    test('creates equal rect', () => {
+      const rect = new Rect(10, 20, 30, 40);
+      const other = Rect.copy(rect);
+      expect(other).toEqual(rect);
+      expect(other).not.toBe(rect);
+    });
+  });
+  test('resizeAndRecenter', () => {
+    let rect = new Rect(10, 20, 30, 40);
+    let center = [...rect.center];
+    rect.resizeAndRecenter([20, 25]);
+    expect(center).toEqual(rect.center);
+  });
+  test('teleportTo', () => {
+    let rect = new Rect(10, 20, 30, 40);
+    rect.teleportTo([56, 57]);
+    expect(rect.center).toEqual([56, 57]);
+  });
+});
