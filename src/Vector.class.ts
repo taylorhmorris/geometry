@@ -1,3 +1,8 @@
+/**
+ * A class for a `Vector`
+ * 
+ * @alpha
+ */
 export class Vector {
   public x: number;
   public y: number;
@@ -11,10 +16,12 @@ export class Vector {
     this.y = y;
   }
 
+  /**
+   * The magnitude of the `Vector`
+   */
   public get magnitude(): number {
     return Math.sqrt(this.x ** 2 + this.y ** 2);
   }
-
   public set magnitude(value: number) {
     if (this.magnitude === 0) return;
     const ratio = value / this.magnitude;
@@ -22,6 +29,9 @@ export class Vector {
     this.y = ratio * this.y;
   }
 
+  /**
+   * The direction of the `Vector` in radians
+   */
   public get direction(): number {
     return Math.atan(this.y / this.x);
   }
