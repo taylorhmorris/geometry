@@ -1,6 +1,6 @@
 /**
  * A class for a `Vector`
- * 
+ *
  * @alpha
  */
 export class Vector {

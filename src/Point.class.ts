@@ -1,6 +1,6 @@
 /**
  * A class for a `Point`
- * 
+ *
  * @alpha
  */
 export class Point {

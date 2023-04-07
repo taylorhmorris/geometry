@@ -4,7 +4,7 @@ import { Vector } from './Vector.class';
 
 /**
  * A class for Rectangles
- * 
+ *
  * @alpha
  */
 export class Rect {
@@ -17,10 +17,10 @@ export class Rect {
 
   /**
    * Constructs a new copy of a given `Rect`
-   * 
+   *
    * @param other `Rect` to copy
    * @returns the new copy of the given `Rect`
-   * 
+   *
    * @beta
    */
   public static copy(other: Rect): Rect {
@@ -29,12 +29,12 @@ export class Rect {
 
   /**
    * The constructor of the `Rect` class
-   * 
+   *
    * @param x the x position of the `Rect`
    * @param y the y position of the `Rect`
    * @param width the width of the `Rect`
    * @param height the height of the `Rect`
-   * 
+   *
    * @beta
    */
   constructor(x: number, y: number, width: number, height: number) {
@@ -47,7 +47,7 @@ export class Rect {
   /**
    * Updates the `Rect` to equal the given `Rect`
    * @param other the `Rect` to copy
-   * 
+   *
    * @beta
    */
   public from(other: Rect) {
@@ -58,7 +58,7 @@ export class Rect {
   }
 
   /**
-   * The x position of the right side of the `Rect` 
+   * The x position of the right side of the `Rect`
    */
   public get right(): number {
     return this.x + this.width / 2;
@@ -68,7 +68,7 @@ export class Rect {
   }
 
   /**
-   * The x position of the left side of the `Rect` 
+   * The x position of the left side of the `Rect`
    */
   public get left(): number {
     return this.x - this.width / 2;
@@ -78,7 +78,7 @@ export class Rect {
   }
 
   /**
-   * The y position of the top side of the `Rect` 
+   * The y position of the top side of the `Rect`
    */
   public get top(): number {
     return this.y - this._height / 2;
@@ -88,7 +88,7 @@ export class Rect {
   }
 
   /**
-   * The y position of the bottom side of the `Rect` 
+   * The y position of the bottom side of the `Rect`
    */
   public get bottom(): number {
     return this.y + this._height / 2;
@@ -143,7 +143,7 @@ export class Rect {
    * Checks if an x coordinate crosses the `Rect`
    * @param x the x coordinate to check
    * @returns `true` or `false`
-   * 
+   *
    * @beta
    */
   public collideX(x: number): boolean {
@@ -152,10 +152,10 @@ export class Rect {
 
   /**
    * Checks if a y coordinate crosses the `Rect`
-   * 
+   *
    * @param y the y coordinate to check
    * @returns `true` or `false`
-   * 
+   *
    * @beta
    */
   public collideY(y: number): boolean {
@@ -164,11 +164,11 @@ export class Rect {
 
   /**
    * Checks if an x, y coordinate touches the `Rect`
-   * 
+   *
    * @param x the x coordinate to check
    * @param y the y coordinate to check
    * @returns `true` or `false`
-   * 
+   *
    * @beta
    */
   public collideXY(x: number, y: number): boolean {
@@ -177,10 +177,10 @@ export class Rect {
 
   /**
    * Checks if a {@link PointArray | `PointArray`} touches the `Rect`
-   * 
+   *
    * @param point the point to check
    * @returns `true` or `false`
-   * 
+   *
    * @beta
    */
   public collidePoint(point: PointArray): boolean {
@@ -189,10 +189,10 @@ export class Rect {
 
   /**
    * Checks if two `Rect`s collide
-   * 
+   *
    * @param rect another `Rect`
    * @returns `true` or `false`
-   * 
+   *
    * @beta
    */
   public collideRect(rect: Rect) {
@@ -205,11 +205,11 @@ export class Rect {
   }
 
   /**
-   * 
+   *
    * @param rect another `Rect`
    * @param moveVector the movement Vector
-   * @returns 
-   * 
+   * @returns
+   *
    * @alpha
    */
   public collisionFace(
@@ -239,7 +239,7 @@ export class Rect {
    * Align the `Rect` to a specific face of another `Rect`
    * @param other the other `Rect`
    * @param face the face to align
-   * 
+   *
    * @alpha
    */
   public alignToFace(other: Rect, face: Face) {
@@ -266,11 +266,11 @@ export class Rect {
     }
   }
 
-   /**
+  /**
    * Align the `Rect` to another `Rect`
    * @param other the other `Rect`
    * @param direction the direction to move the `Rect`
-   * 
+   *
    * @alpha
    */
   public alignTo(other: Rect, direction: [number, number]) {
@@ -287,9 +287,9 @@ export class Rect {
 
   /**
    * Resizes the `Rect` leaving its center in the same place
-   * 
+   *
    * @param size the new size for the `Rect`
-   * 
+   *
    * @beta
    */
   public resizeAndRecenter(size: PointArray) {
@@ -301,8 +301,8 @@ export class Rect {
 
   /**
    * Move the `Rect` to a new position
-   * 
-   * @param position 
+   *
+   * @param position
    */
   public teleportTo(position: PointArray) {
     this.center = position;
