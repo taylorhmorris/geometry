@@ -12,8 +12,8 @@ export class Rect {
   x: number;
   /** The y coordinate of the `Rect` */
   y: number;
-  private _width: number;
-  private _height: number;
+  _width: number;
+  _height: number;
 
   /**
    * Constructs a new copy of a given `Rect`
