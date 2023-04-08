@@ -183,7 +183,7 @@ export class Rect {
    *
    * @beta
    */
-  public collidePoint(point: PointArray): boolean {
+  public collidePointArray(point: PointArray): boolean {
     return this.collideXY(point[0], point[1]);
   }
 

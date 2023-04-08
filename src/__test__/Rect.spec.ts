@@ -38,6 +38,22 @@ describe('from', () => {
   });
 });
 
+describe('position', () => {
+  test('can be set', () => {
+    const rect = new Rect(1, 2, 4, 5);
+    rect.position = [3, 4];
+    expect(rect.position).toEqual([3, 4]);
+  });
+});
+
+describe('collidePointArray', () => {
+  test('detects collision', () => {
+    const rect = new Rect(1, 2, 1, 1);
+    expect(rect.collidePointArray([0, 0])).toBe(false);
+    expect(rect.collidePointArray([1.3, 1.8])).toBe(true);
+  });
+});
+
 describe('moves', () => {
   test('by x', () => {
     const rect = new Rect(5, 10, 15, 20);

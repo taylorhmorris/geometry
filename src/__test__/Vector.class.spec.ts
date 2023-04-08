@@ -20,6 +20,21 @@ describe('constructor', () => {
   });
 });
 
+describe('static', () => {
+  test('can be copied', () => {
+    const vec = new Vector(3, 5);
+    const vec2 = Vector.copy(vec);
+    expect(vec2.x).toBe(3);
+    expect(vec2.y).toBe(5);
+    vec.x = 6;
+    vec.y = 7;
+    expect(vec.x).toBe(6);
+    expect(vec.y).toBe(7);
+    expect(vec2.x).toBe(3);
+    expect(vec2.y).toBe(5);
+  });
+});
+
 describe('magnitude', () => {
   test('3 4 5', () => {
     const vec = new Vector(3, 4);
