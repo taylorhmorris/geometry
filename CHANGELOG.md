@@ -7,6 +7,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.0.2] - 2023.04-08
+
 ### Added
 
 - Support for CommonJS
@@ -22,5 +24,6 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.1...HEAD
+[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/tmorris42/geometry/releases/tag/v0.0.1
