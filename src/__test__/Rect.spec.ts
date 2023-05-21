@@ -174,6 +174,18 @@ describe('alignTo', () => {
     rect2.alignTo(rect1, [0, 1]);
     expect(rect2.collideRect(rect1)).toBe(false);
   });
+
+  test('diagonal collions pushes to corner', () => {
+    const rect1 = new Rect(11, 16, 5, 5);
+    const rect2 = new Rect(10, 15, 5, 5);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    rect1.alignTo(rect2, [1, 1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.right).toEqual(rect2.left);
+    expect(rect1.bottom).toEqual(rect2.top);
+  });
 });
 
 describe('alignToFace', () => {

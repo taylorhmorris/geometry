@@ -278,7 +278,8 @@ export class Rect {
       this.right = other.left;
     } else if (direction[0] < 0) {
       this.left = other.right;
-    } else if (direction[1] > 0) {
+    }
+    if (direction[1] > 0) {
       this.bottom = other.top;
     } else if (direction[1] < 0) {
       this.top = other.bottom;

@@ -1,6 +1,6 @@
 {
   "name": "@taylorhmorris/geometry",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple geometry package",
   "main": "lib/cjs/index.js",
   "module": "lib/mjs/index.js",
@@ -9,6 +9,7 @@
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "build:docs": "typedoc src/index.ts",
     "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint",
     "format": "prettier --write \"src/**/*.ts\"",
     "coverage": "vitest run --coverage",
