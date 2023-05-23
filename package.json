@@ -1,6 +1,6 @@
 {
   "name": "@taylorhmorris/geometry",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple geometry package",
   "main": "lib/cjs/index.js",
   "module": "lib/mjs/index.js",
