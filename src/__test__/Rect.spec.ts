@@ -175,9 +175,21 @@ describe('alignTo', () => {
     expect(rect2.collideRect(rect1)).toBe(false);
   });
 
-  test('diagonal collions pushes to corner', () => {
-    const rect1 = new Rect(11, 16, 5, 5);
-    const rect2 = new Rect(10, 15, 5, 5);
+  test('diagonal collisions pushes to corner', () => {
+    const rect1 = new Rect(10.9, 10.9, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    rect1.alignTo(rect2, [-1, -1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.left).toEqual(rect2.right);
+    expect(rect1.top).toEqual(rect2.bottom);
+  });
+
+  test('diagonal collisions pushes to corner', () => {
+    const rect1 = new Rect(9.6, 9.6, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
     expect(rect2.collideRect(rect1)).toBe(true);
     expect(rect1.collideRect(rect2)).toBe(true);
     rect1.alignTo(rect2, [1, 1]);
@@ -185,6 +197,18 @@ describe('alignTo', () => {
     expect(rect1.collideRect(rect2)).toBe(false);
     expect(rect1.right).toEqual(rect2.left);
     expect(rect1.bottom).toEqual(rect2.top);
+  });
+
+  test('unequal diagonal collisions push along line', () => {
+    const rect1 = new Rect(10.9, 10.1, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    rect1.alignTo(rect2, [-1, -1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.left).toEqual(rect2.right);
+    expect(rect1.y).toEqual(rect2.y + .2);
   });
 });
 

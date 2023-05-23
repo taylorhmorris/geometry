@@ -267,23 +267,34 @@ export class Rect {
   }
 
   /**
-   * Align the `Rect` to another `Rect`
+   * Align the `Rect` to another `Rect` along a line
    * @param other the other `Rect`
    * @param direction the direction to move the `Rect`
    *
    * @alpha
    */
-  public alignTo(other: Rect, direction: [number, number]) {
-    if (direction[0] > 0) {
-      this.right = other.left;
-    } else if (direction[0] < 0) {
-      this.left = other.right;
+  public alignTo(other: Rect, direction: [number, number] | Vector) {
+    let v: Vector;
+    if (direction instanceof Vector) {
+      v = direction;
+    } else {
+      v = new Vector(direction[0], direction[1]);
     }
-    if (direction[1] > 0) {
-      this.bottom = other.top;
-    } else if (direction[1] < 0) {
-      this.top = other.bottom;
-    }
+
+    const m = Math.abs(v.y / v.x);
+
+    const distLR = this.left - other.right;
+    const distRL = this.right - other.left;
+    const distTB = this.top - other.bottom;
+    const distBT = this.bottom - this.top;
+
+    const distX = Math.abs(distLR) < Math.abs(distRL) ? distLR : distRL;
+    const distY = Math.abs(distTB) < Math.abs(distBT) ? distTB : distBT;
+    const deltaX = Math.abs(distX) < Math.abs(distY) ? -distX : -distY / m;
+    const deltaY = deltaX * m;
+
+    this.x += deltaX;
+    this.y += deltaY;
   }
 
   /**
