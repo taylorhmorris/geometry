@@ -210,6 +210,71 @@ describe('alignTo', () => {
     expect(rect1.left).toEqual(rect2.right);
     expect(rect1.y).toEqual(rect2.y + .2);
   });
+
+  test('straight down collision aligns bottom to top', () => {
+    const rect1 = new Rect(10, 9.1, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    expect(rect1.bottom).toBe(9.6);
+    rect1.alignTo(rect2, [0, 1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.left).toEqual(rect2.left);
+    expect(rect1.bottom).toEqual(rect2.top);
+  });
+
+  test('straight up collision aligns top to bottom', () => {
+    const rect1 = new Rect(10, 10.9, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    expect(rect1.top).toBe(10.4);
+    rect1.alignTo(rect2, [0, 1]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.left).toEqual(rect2.left);
+    expect(rect1.top).toEqual(rect2.bottom);
+  });
+
+  test('straight right collision aligns right to left', () => {
+    const rect1 = new Rect(9.1, 10, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    expect(rect1.right).toBe(9.6);
+    rect1.alignTo(rect2, [1, 0]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.top).toEqual(rect2.top);
+    expect(rect1.right).toEqual(rect2.left);
+  });
+
+  test('straight left collision aligns left to right', () => {
+    const rect1 = new Rect(10.9, 10, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    expect(rect1.left).toBe(10.4);
+    rect1.alignTo(rect2, [1, 0]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.top).toEqual(rect2.top);
+    expect(rect1.left).toEqual(rect2.right);
+  });
+
+  test('straight left collision aligns left to right with negative v.x', () => {
+    const rect1 = new Rect(10.9, 10, 1, 1);
+    const rect2 = new Rect(10, 10, 1, 1);
+    expect(rect2.collideRect(rect1)).toBe(true);
+    expect(rect1.collideRect(rect2)).toBe(true);
+    expect(rect1.left).toBe(10.4);
+    rect1.alignTo(rect2, [-1, 0]);
+    expect(rect2.collideRect(rect1)).toBe(false);
+    expect(rect1.collideRect(rect2)).toBe(false);
+    expect(rect1.top).toEqual(rect2.top);
+    expect(rect1.left).toEqual(rect2.right);
+  });
 });
 
 describe('alignToFace', () => {

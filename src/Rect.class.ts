@@ -286,15 +286,22 @@ export class Rect {
     const distLR = this.left - other.right;
     const distRL = this.right - other.left;
     const distTB = this.top - other.bottom;
-    const distBT = this.bottom - this.top;
+    const distBT = this.bottom - other.top;
 
     const distX = Math.abs(distLR) < Math.abs(distRL) ? distLR : distRL;
     const distY = Math.abs(distTB) < Math.abs(distBT) ? distTB : distBT;
-    const deltaX = Math.abs(distX) < Math.abs(distY) ? -distX : -distY / m;
-    const deltaY = deltaX * m;
 
-    this.x += deltaX;
-    this.y += deltaY;
+    if (Math.abs(distX) < Math.abs(distY) && v.x != 0) {
+      this.x -= distX;
+      if (v.y && m) {
+        this.y -= distX * m;
+      }
+    } else if (Math.abs(distY) <= Math.abs(distX) && v.y != 0) {
+      this.y += -distY;
+      if (v.x && m) {
+        this.x += -distY / m;
+      }
+    }
   }
 
   /**
