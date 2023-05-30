@@ -80,4 +80,71 @@ describe('direction', () => {
     const vec = new Vector(6, -6);
     expect(vec.direction).toBeCloseTo((-45 * Math.PI) / 180);
   });
+  test('1 0 0', () => {
+    const vec = new Vector(1, 0);
+    expect(vec.direction).toBeCloseTo(0);
+  });
+  test('0 1 PI/2', () => {
+    const vec = new Vector(0, 1);
+    expect(vec.direction).toBeCloseTo(Math.PI / 2);
+  });
+
+  describe('set', () => {
+    test('turn does not change magnitude', () => {
+      const vec = new Vector(1, 1);
+      const magnitude = vec.magnitude;
+      const newDirection = Math.PI / 2;
+      vec.direction = newDirection;
+      expect(vec.magnitude).toBeCloseTo(magnitude);
+      expect(vec.direction).toBeCloseTo(newDirection);
+    });
+
+    test('negative turn does not change magnitude', () => {
+      const vec = new Vector(0, 1);
+      const magnitude = vec.magnitude;
+      const newDirection = Math.PI / 2;
+      vec.direction = newDirection;
+      expect(vec.magnitude).toBeCloseTo(magnitude);
+      expect(vec.direction).toBeCloseTo(newDirection);
+    });
+
+    test('from quad4 to quad1', () => {
+      const vec = new Vector(0.5, -1);
+      const magnitude = vec.magnitude;
+      const newDirection = Math.PI / 4;
+      vec.direction = newDirection;
+      expect(vec.magnitude).toBeCloseTo(magnitude);
+      expect(vec.direction).toBeCloseTo(newDirection);
+    });
+
+    test('from quad3 to quad1', () => {
+      const vec = new Vector(-1, -1);
+      const magnitude = vec.magnitude;
+      const newDirection = Math.PI / 4;
+      vec.direction = newDirection;
+      expect(vec.magnitude).toBeCloseTo(magnitude);
+      expect(vec.direction).toBeCloseTo(newDirection);
+    });
+
+    test('from quad1 to quad3', () => {
+      const vec = new Vector(1, 1);
+      const magnitude = vec.magnitude;
+      expect(vec.direction).toBe(Math.PI / 4);
+      const newDirection = 5 * Math.PI / 4;
+      vec.direction = newDirection;
+      expect(vec.x).toBeCloseTo(-1);
+      expect(vec.y).toBeCloseTo(-1);
+      expect(vec.magnitude).toBeCloseTo(magnitude);
+      expect(vec.direction).toBeCloseTo(newDirection - 2 * Math.PI);
+    });
+  });
+
+  describe('rotate', () => {
+    test('rotates by a given angle', () => {
+      const vec = new Vector(0, 1);
+      expect(vec.direction).toBeCloseTo(Math.PI / 2);
+      vec.rotate(Math.PI);
+      expect(vec.direction).toBeCloseTo(-Math.PI / 2);
+    });
+  });
 });

@@ -7,25 +7,30 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
-## [0.0.5] - 2023.05-23
+### Added
+
+- Setter for Vector.direction
+- Vector.rotate to rotate by a given angle
+
+## [0.0.5] - 2023-05-23
 
 ### Fixed
 
 - Rect.alignTo infinite slope error
 
-## [0.0.4] - 2023.05-23
+## [0.0.4] - 2023-05-23
 
 ### Changed
 
 - Rect.alignTo moves Rect smoothly along line
 
-## [0.0.3] - 2023.05-21
+## [0.0.3] - 2023-05-21
 
 ### Changed
 
 - Rect.alignTo moves Rect along both axes
 
-## [0.0.2] - 2023.04-08
+## [0.0.2] - 2023-04-08
 
 ### Added
 
