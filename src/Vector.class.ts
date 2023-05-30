@@ -7,17 +7,48 @@ export class Vector {
   public x: number;
   public y: number;
 
-  public static copy(other: Vector): Vector {
-    return new Vector(other.x, other.y);
-  }
-
   constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
 
   /**
-   * The magnitude of the `Vector`
+   * Constructs a new copy of a given {@link Vector}
+   *
+   * @param other {@link Vector} to copy
+   * @returns the new copy of the given {@link Vector}
+   *
+   * @beta
+   */
+  public static copy(other: Vector): Vector {
+    return new Vector(other.x, other.y);
+  }
+  /**
+   * Alias for {@link Vector.copy}
+   */
+  public static from(other: Vector): Vector {
+    return Vector.copy(other);
+  }
+
+  /**
+   * Updates the {@link Vector} to equal the given {@link Vector}
+   * @param other the {@link Vector} to copy
+   *
+   * @beta
+   */
+  public from(other: Vector) {
+    this.x = other.x;
+    this.y = other.y;
+  }
+  /**
+   * Alias for {@link Vector#from}
+   */
+  public copy(other: Vector) {
+    this.from(other);
+  }
+
+  /**
+   * The magnitude of the {@link Vector}
    */
   public get magnitude(): number {
     return Math.sqrt(this.x ** 2 + this.y ** 2);
@@ -30,7 +61,7 @@ export class Vector {
   }
 
   /**
-   * The direction of the `Vector` in radians, between -PI and PI
+   * The direction of the {@link Vector} in radians, between -PI and PI
    */
   public get direction(): number {
     return Math.atan2(this.y, this.x);
@@ -45,7 +76,7 @@ export class Vector {
   }
 
   /**
-   * Rotates the vector by a given angle
+   * Rotates the {@link Vector} by a given angle
    * @param deltaAngle the desired change in the angle (in radians)
    */
   public rotate(deltaAngle: number) {

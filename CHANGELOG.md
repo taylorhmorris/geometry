@@ -11,6 +11,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Setter for Vector.direction
 - Vector.rotate to rotate by a given angle
+- Point class
+- Rect.collidePoint
 
 ## [0.0.5] - 2023-05-23
 

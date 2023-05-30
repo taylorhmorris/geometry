@@ -11,23 +11,29 @@ export class Circle {
   private _radius: number;
 
   /**
-   * Constructs a new copy of a given `Circle`
+   * Constructs a new copy of a given {@link Circle}
    *
-   * @param other `Circle` to copy
-   * @returns the new copy of the given `Circle`
+   * @param other {@link Circle} to copy
+   * @returns the new copy of the given {@link Circle}
    *
    * @beta
    */
   public static copy(other: Circle): Circle {
     return new Circle(other.x, other.y, other._radius);
   }
+  /**
+   * Alias for {@link Circle.copy}
+   */
+  public static from(other: Rect): Rect {
+    return Rect.copy(other);
+  }
 
   /**
-   * The constructor of the `Circle` class
+   * The constructor of the {@link Circle} class
    *
-   * @param x the x position of the `Circle`
-   * @param y the y position of the `Circle`
-   * @param radius the radius of the `Circle`
+   * @param x the x position of the {@link Circle}
+   * @param y the y position of the {@link Circle}
+   * @param radius the radius of the {@link Circle}
    */
   constructor(x: number, y: number, radius: number) {
     this.x = x;
@@ -36,7 +42,25 @@ export class Circle {
   }
 
   /**
-   * The center of the `Circle`
+   * Updates the {@link Circle} to equal the given {@link Circle}
+   * @param other the {@link Circle} to copy
+   *
+   * @beta
+   */
+  public from(other: Circle) {
+    this.x = other.x;
+    this.y = other.y;
+    this._radius = other._radius;
+  }
+  /**
+   * Alias for {@link Circle#from}
+   */
+  public copy(other: Circle) {
+    this.from(other);
+  }
+
+  /**
+   * The center of the {@link Circle}
    */
   public get center(): [number, number] {
     return [this.x, this.y];
@@ -47,7 +71,7 @@ export class Circle {
   }
 
   /**
-   * The radius of the `Circle`
+   * The radius of the {@link Circle}
    */
   public get radius(): number {
     return this._radius;
@@ -57,7 +81,7 @@ export class Circle {
   }
 
   /**
-   * Checks if an x coordinate crosses the `Circle`
+   * Checks if an x coordinate crosses the {@link Circle}
    * @param x an x coordinate
    * @returns `true` or `false`
    */
@@ -67,7 +91,7 @@ export class Circle {
   }
 
   /**
-   * Checks if an y coordinate crosses the `Circle`
+   * Checks if an y coordinate crosses the {@link Circle}
    * @param y an y coordinate
    * @returns `true` or `false`
    */
@@ -77,7 +101,7 @@ export class Circle {
   }
 
   /**
-   * Checks if an x, y coordinate touches the `Circle`
+   * Checks if an x, y coordinate touches the {@link Circle}
    *
    * @param x the x coordinate to check
    * @param y the y coordinate to check
@@ -90,9 +114,9 @@ export class Circle {
   }
 
   /**
-   * Checks if the `Circle` collides with a given `Rect`
+   * Checks if the {@link Circle} collides with a given {@link Rect}
    *
-   * @param rect a `Rect`
+   * @param rect a {@link Rect}
    * @returns `true` or `false`
    *
    * @beta
@@ -112,8 +136,8 @@ export class Circle {
   }
 
   /**
-   * Checks if two `Circle`s collide
-   * @param other another `Circle`
+   * Checks if two {@link Circle}s collide
+   * @param other another {@link Circle}
    * @returns
    */
   public collideCircle(other: Circle): boolean {
