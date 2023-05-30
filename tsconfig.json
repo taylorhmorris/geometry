@@ -1,8 +1,14 @@
 {
-  "extends": "./tsconfig-base.json",
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./node_modules", "**/__test__/*", "./coverage", "./docs"],
   "compilerOptions": {
-      "module": "esnext",
-      "outDir": "lib/mjs",
-      "target": "esnext"
+    "target": "esnext",
+    "module": "esnext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["es6"],
+    "sourceMap": true,
+    "outDir": "./dist",
   }
 }

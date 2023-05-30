@@ -2,4 +2,4 @@ export { Rect } from './Rect.class';
 export { Vector } from './Vector.class';
 export { Circle } from './Circle.class';
 export { Face } from './Face.enum';
-export { PointArray } from './PointArray.type';
+export type { PointArray } from './PointArray.type';
