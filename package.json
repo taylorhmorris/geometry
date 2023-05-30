@@ -1,6 +1,6 @@
 {
   "name": "@taylorhmorris/geometry",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple geometry package",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
