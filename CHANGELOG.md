@@ -7,6 +7,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.0.6] - 2023-05-30
+
 ### Added
 
 - Setter for Vector.direction
@@ -49,7 +51,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.5...HEAD
+[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.6...HEAD
+[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.5...v0.0.6
 [0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.4...v0.0.5
 [0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.3...v0.0.4
 [0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.2...v0.0.3
