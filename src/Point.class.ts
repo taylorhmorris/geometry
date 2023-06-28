@@ -31,6 +31,40 @@ export class Point {
   public static from(other: Point): Point {
     return Point.copy(other);
   }
+  /**
+   * 
+   * @param point the point to rotate
+   * @param theta the amount in radians to rotate
+   * @param origin the origin to rotate around (default: (0, 0))
+   * 
+   * @returns a new {@link Point} rotated around the given {@link Point} 
+   * @alpha
+   */
+  public static rotate(point: Point, theta: number, origin: Point = new Point(0, 0)): Point {
+    const copy = Point.copy(point);
+    copy.rotate(theta, origin);
+    return copy;
+  }
+
+  /**
+   * Rotates the given point by theta around a given origin
+   * 
+   * @param point the point to rotate
+   * @param theta the amount in radians to rotate
+   * @param origin the origin to rotate around (default: (0, 0))
+   * 
+   * @alpha
+   */
+  public rotate(theta: number, origin: Point = new Point(0, 0)) {
+    const cos = Math.cos(theta);
+    const sin = Math.sin(theta);
+    this.x -= origin.x;
+    this.y -= origin.y;
+    const newX = cos * this.x - sin * this.y;
+    const newY = sin * this.x + cos * this.y;
+    this.x = newX + origin.x;
+    this.y = newY + origin.y;
+  }
 
   /**
    * Updates the {@link Point} to equal the given {@link Point}

@@ -15,6 +15,8 @@ export class Rect {
   y: number;
   _width: number;
   _height: number;
+  /** The angle of rotation of the {@link Rect} in radians */
+  angle: number;
 
   /**
    * Constructs a new copy of a given {@link Rect}
@@ -25,7 +27,7 @@ export class Rect {
    * @beta
    */
   public static copy(other: Rect): Rect {
-    return new Rect(other.x, other.y, other._width, other._height);
+    return new Rect(other.x, other.y, other._width, other._height, other.angle);
   }
   /**
    * Alias for {@link Rect.copy}
@@ -41,14 +43,16 @@ export class Rect {
    * @param y the y position of the {@link Rect}
    * @param width the width of the {@link Rect}
    * @param height the height of the {@link Rect}
+   * @param angle the angle of rotation of the {@link Rect} in radians (default: 0)
    *
    * @beta
    */
-  constructor(x: number, y: number, width: number, height: number) {
+  constructor(x: number, y: number, width: number, height: number, angle: number = 0) {
     this.x = x;
     this.y = y;
     this._width = width;
     this._height = height;
+    this.angle = angle;
   }
 
   /**
@@ -62,6 +66,7 @@ export class Rect {
     this.y = other.y;
     this._width = other._width;
     this._height = other._height;
+    this.angle = other.angle;
   }
   /**
    * Alias for {@link Rect#from}
