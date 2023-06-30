@@ -130,7 +130,7 @@ describe('direction', () => {
       const vec = new Vector(1, 1);
       const magnitude = vec.magnitude;
       expect(vec.direction).toBe(Math.PI / 4);
-      const newDirection = 5 * Math.PI / 4;
+      const newDirection = (5 * Math.PI) / 4;
       vec.direction = newDirection;
       expect(vec.x).toBeCloseTo(-1);
       expect(vec.y).toBeCloseTo(-1);

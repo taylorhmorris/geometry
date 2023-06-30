@@ -208,7 +208,7 @@ describe('alignTo', () => {
     expect(rect2.collideRect(rect1)).toBe(false);
     expect(rect1.collideRect(rect2)).toBe(false);
     expect(rect1.left).toEqual(rect2.right);
-    expect(rect1.y).toEqual(rect2.y + .2);
+    expect(rect1.y).toEqual(rect2.y + 0.2);
   });
 
   test('straight down collision aligns bottom to top', () => {

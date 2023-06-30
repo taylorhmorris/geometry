@@ -47,7 +47,13 @@ export class Rect {
    *
    * @beta
    */
-  constructor(x: number, y: number, width: number, height: number, angle: number = 0) {
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    angle: number = 0,
+  ) {
     this.x = x;
     this.y = y;
     this._width = width;
@@ -214,8 +220,7 @@ export class Rect {
    * @beta
    */
   public collidePoint(point: Point | PointArray): boolean {
-    if (point instanceof Point)
-      return this.collideXY(point.x, point.y);
+    if (point instanceof Point) return this.collideXY(point.x, point.y);
     return this.collidePointArray(point);
   }
 
