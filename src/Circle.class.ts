@@ -11,21 +11,21 @@ export class Circle {
   private _radius: number;
 
   /**
-   * Constructs a new copy of a given {@link Circle}
-   *
-   * @param other {@link Circle} to copy
-   * @returns the new copy of the given {@link Circle}
-   *
-   * @beta
+   * @deprecated Use {@link Circle.from} instead.
    */
   public static copy(other: Circle): Circle {
     return new Circle(other.x, other.y, other._radius);
   }
   /**
-   * Alias for {@link Circle.copy}
+   * Constructs a new {@link Circle} from a given {@link Circle}
+   *
+   * @param other {@link Circle} to copy
+   * @returns the new {@link Circle}
+   *
+   * @beta
    */
-  public static from(other: Rect): Rect {
-    return Rect.copy(other);
+  public static from(other: Circle): Circle {
+    return new Circle(other.x, other.y, other._radius);
   }
 
   /**
@@ -53,10 +53,10 @@ export class Circle {
     this._radius = other._radius;
   }
   /**
-   * Alias for {@link Circle#from}
+   * @returns a copy of the {@link Circle}
    */
-  public copy(other: Circle) {
-    this.from(other);
+  public copy(): Circle {
+    return Circle.from(this);
   }
 
   /**

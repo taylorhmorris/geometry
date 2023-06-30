@@ -90,7 +90,7 @@ export class Point {
     }
   }
   /**
-   * Alias for {@link Point#from}
+   * @returns a copy of the {@link Point}
    */
   public copy(): Point {
     return Point.from(this);

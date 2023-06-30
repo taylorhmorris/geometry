@@ -16,10 +16,15 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 ### Changed
 
 - Point.copy now returns a copy of the Point instead.
+- Circle.copy now returns a copy of the Circle instead.
+
+### Fixed
+- static Circle.from now properly returns a new Circle.
 
 ### Deprecated
 
 - static Point.copy
+- static Circle.copy
 
 ## [0.0.6] - 2023-05-30
 
