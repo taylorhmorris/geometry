@@ -18,6 +18,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Point.copy now returns a copy of the Point instead.
 - Circle.copy now returns a copy of the Circle instead.
 - Vector.copy now returns a copy of the Vector instead.
+- Rect.copy now returns a copy of the Vector instead.
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
@@ -27,6 +28,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - static Point.copy
 - static Circle.copy
 - static Vector.copy
+- static Rect.copy
 
 ## [0.0.6] - 2023-05-30
 

@@ -24,16 +24,21 @@ export class Rect {
    * @param other {@link Rect} to copy
    * @returns the new copy of the given {@link Rect}
    *
-   * @beta
+   * @deprecated Use {@link Rect.from} instead.
    */
   public static copy(other: Rect): Rect {
-    return new Rect(other.x, other.y, other._width, other._height, other.angle);
+    return Rect.from(other);
   }
   /**
-   * Alias for {@link Rect.copy}
+   * Constructs a new {@link Rect} from a given {@link Rect}
+   *
+   * @param other {@link Rect} to copy
+   * @returns the new {@link Rect}
+   *
+   * @beta
    */
   public static from(other: Rect): Rect {
-    return Rect.copy(other);
+    return new Rect(other.x, other.y, other._width, other._height, other.angle);
   }
 
   /**
@@ -75,10 +80,10 @@ export class Rect {
     this.angle = other.angle;
   }
   /**
-   * Alias for {@link Rect#from}
+   * @returns a copy of the {@link Rect}
    */
-  public copy(other: Rect) {
-    this.from(other);
+  public copy(): Rect {
+    return Rect.from(this);
   }
 
   /**
