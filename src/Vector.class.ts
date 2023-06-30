@@ -18,16 +18,21 @@ export class Vector {
    * @param other {@link Vector} to copy
    * @returns the new copy of the given {@link Vector}
    *
-   * @beta
+   * @deprecated Use {@link Vector.from} instead.
    */
   public static copy(other: Vector): Vector {
-    return new Vector(other.x, other.y);
+    return Vector.from(other);
   }
   /**
-   * Alias for {@link Vector.copy}
+   * Constructs a new {@link Vector} from a given {@link Vector}
+   *
+   * @param other {@link Vector} to copy
+   * @returns the new {@link Vector}
+   *
+   * @beta
    */
   public static from(other: Vector): Vector {
-    return Vector.copy(other);
+    return new Vector(other.x, other.y);
   }
 
   /**
@@ -43,8 +48,8 @@ export class Vector {
   /**
    * Alias for {@link Vector#from}
    */
-  public copy(other: Vector) {
-    this.from(other);
+  public copy(): Vector {
+    return Vector.from(this);
   }
 
   /**
