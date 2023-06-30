@@ -1,3 +1,5 @@
+import { PointArray } from "./PointArray.type";
+
 /**
  * A class for a `Point`
  *
@@ -28,8 +30,10 @@ export class Point {
   /**
    * Alias for {@link Point.copy}
    */
-  public static from(other: Point): Point {
-    return Point.copy(other);
+  public static from(other: Point | PointArray): Point {
+    if (other instanceof Point)
+      return Point.copy(other);
+    return new Point(other[0], other[1]);
   }
   /**
    * 
@@ -72,9 +76,14 @@ export class Point {
    *
    * @beta
    */
-  public from(other: Point) {
-    this.x = other.x;
-    this.y = other.y;
+  public from(other: Point | PointArray) {
+    if (other instanceof Point) {
+      this.x = other.x;
+      this.y = other.y;
+    } else {
+      this.x = other[0];
+      this.y = other[1];
+    }    
   }
   /**
    * Alias for {@link Point#from}
