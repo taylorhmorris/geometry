@@ -13,6 +13,14 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - rotate method for Point
 - Point.from now accepts PointArray
 
+### Changed
+
+- Point.copy now returns a copy of the Point instead.
+
+### Deprecated
+
+- static Point.copy
+
 ## [0.0.6] - 2023-05-30
 
 ### Added

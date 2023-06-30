@@ -1,4 +1,4 @@
-import { PointArray } from "./PointArray.type";
+import { PointArray } from './PointArray.type';
 
 /**
  * A class for a `Point`
@@ -17,34 +17,38 @@ export class Point {
   }
 
   /**
-   * Constructs a new copy of a given {@link Point}
+   * @deprecated Use {@link Point.from} instead.
+   */
+  public static copy(other: Point | PointArray): Point {
+    return Point.from(other);
+  }
+
+  /**
+   * Constructs a new Point from a given {@link Point} or {@link PointArray}
    *
-   * @param other {@link Point} to copy
-   * @returns the new copy of the given {@link Point}
+   * @param other {@link Point} or {@link PointArray} to copy
+   * @returns the new {@link Point}
    *
    * @beta
    */
-  public static copy(other: Point): Point {
-    return new Point(other.x, other.y);
-  }
-  /**
-   * Alias for {@link Point.copy}
-   */
   public static from(other: Point | PointArray): Point {
-    if (other instanceof Point)
-      return Point.copy(other);
+    if (other instanceof Point) return Point.copy(other);
     return new Point(other[0], other[1]);
   }
   /**
-   * 
+   *
    * @param point the point to rotate
    * @param theta the amount in radians to rotate
    * @param origin the origin to rotate around (default: (0, 0))
-   * 
-   * @returns a new {@link Point} rotated around the given {@link Point} 
+   *
+   * @returns a new {@link Point} rotated around the given {@link Point}
    * @alpha
    */
-  public static rotate(point: Point, theta: number, origin: Point = new Point(0, 0)): Point {
+  public static rotate(
+    point: Point,
+    theta: number,
+    origin: Point = new Point(0, 0),
+  ): Point {
     const copy = Point.copy(point);
     copy.rotate(theta, origin);
     return copy;
@@ -52,11 +56,11 @@ export class Point {
 
   /**
    * Rotates the given point by theta around a given origin
-   * 
+   *
    * @param point the point to rotate
    * @param theta the amount in radians to rotate
    * @param origin the origin to rotate around (default: (0, 0))
-   * 
+   *
    * @alpha
    */
   public rotate(theta: number, origin: Point = new Point(0, 0)) {
@@ -71,8 +75,8 @@ export class Point {
   }
 
   /**
-   * Updates the {@link Point} to equal the given {@link Point}
-   * @param other the {@link Point} to copy
+   * Updates the {@link Point} to equal the given {@link Point} or {@link PointArray}
+   * @param other the {@link Point} or {@link PointArray} to copy
    *
    * @beta
    */
@@ -83,12 +87,12 @@ export class Point {
     } else {
       this.x = other[0];
       this.y = other[1];
-    }    
+    }
   }
   /**
    * Alias for {@link Point#from}
    */
-  public copy(other: Point) {
-    this.from(other);
+  public copy(): Point {
+    return Point.from(this);
   }
 }
