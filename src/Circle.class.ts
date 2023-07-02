@@ -1,3 +1,5 @@
+import { Point } from './Point.class';
+import { PointArray } from './PointArray.type';
 import { Rect } from './Rect.class';
 
 /**
@@ -6,15 +8,14 @@ import { Rect } from './Rect.class';
  * @alpha
  */
 export class Circle {
-  public x: number;
-  public y: number;
+  private _center: Point;
   private _radius: number;
 
   /**
    * @deprecated Use {@link Circle.from} instead.
    */
   public static copy(other: Circle): Circle {
-    return new Circle(other.x, other.y, other._radius);
+    return Circle.from(other);
   }
   /**
    * Constructs a new {@link Circle} from a given {@link Circle}
@@ -25,7 +26,7 @@ export class Circle {
    * @beta
    */
   public static from(other: Circle): Circle {
-    return new Circle(other.x, other.y, other._radius);
+    return new Circle(other._center, other._radius);
   }
 
   /**
@@ -35,9 +36,8 @@ export class Circle {
    * @param y the y position of the {@link Circle}
    * @param radius the radius of the {@link Circle}
    */
-  constructor(x: number, y: number, radius: number) {
-    this.x = x;
-    this.y = y;
+  constructor(center: Point | PointArray, radius: number) {
+    this._center = Point.from(center);
     this._radius = radius;
   }
 
@@ -48,8 +48,7 @@ export class Circle {
    * @beta
    */
   public from(other: Circle) {
-    this.x = other.x;
-    this.y = other.y;
+    this._center = other.center.copy();
     this._radius = other._radius;
   }
   /**
@@ -60,14 +59,33 @@ export class Circle {
   }
 
   /**
+   * The x coordinate of the center of the {@link Circle}
+   */
+  public get x(): number {
+    return this._center.x;
+  }
+  public set x(x: number) {
+    this._center.x = x;
+  }
+
+  /**
+   * The y coordinate of the center of the {@link Circle}
+   */
+  public get y(): number {
+    return this._center.y;
+  }
+  public set y(y: number) {
+    this._center.y = y;
+  }
+
+  /**
    * The center of the {@link Circle}
    */
-  public get center(): [number, number] {
-    return [this.x, this.y];
+  public get center(): Point {
+    return this._center;
   }
-  public set center([x, y]: [number, number]) {
-    this.x = x;
-    this.y = y;
+  public set center(point: Point | PointArray) {
+    this._center.from(point);
   }
 
   /**

@@ -19,6 +19,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.copy now returns a copy of the Circle instead.
 - Vector.copy now returns a copy of the Vector instead.
 - Rect.copy now returns a copy of the Vector instead.
+- Circle.center is now a point
+- Circle.x and Circle.y are now getters and setters for Circle.center
+- Circle constructor now takes a Point or PointArray
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
