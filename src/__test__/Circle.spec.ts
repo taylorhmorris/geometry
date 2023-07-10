@@ -28,3 +28,24 @@ describe('center', () => {
     expect(circ.y).toBe(8);
   });
 });
+
+describe('rotate', () => {
+  test('rotates', () => {
+    const circle = new Circle([1, 1], 5);
+    expect(circle).toBeDefined();
+    expect(circle.x).toBe(1);
+    expect(circle.y).toBe(1);
+    circle.rotate(Math.PI);
+    expect(circle.x).toBeCloseTo(-1);
+    expect(circle.y).toBeCloseTo(-1);
+    circle.rotate(Math.PI / 2);
+    expect(circle.x).toBeCloseTo(1);
+    expect(circle.y).toBeCloseTo(-1);
+    circle.rotate(Math.PI / 2);
+    expect(circle.x).toBeCloseTo(1);
+    expect(circle.y).toBeCloseTo(1);
+    circle.rotate(Math.PI, new Point(0.5, 0.5));
+    expect(circle.x).toBeCloseTo(0);
+    expect(circle.y).toBeCloseTo(0);
+  });
+});

@@ -164,4 +164,16 @@ export class Circle {
     const distranceSq = dx ^ (2 + dy) ^ 2;
     return distranceSq < ((this.radius + other.radius) ^ 2);
   }
+
+  /**
+   * Rotates the circle by theta around a given origin
+   *
+   * @param theta the amount in radians to rotate
+   * @param origin the origin to rotate around (default: (0, 0))
+   *
+   * @alpha
+   */
+  public rotate(theta: number, origin: Point = new Point(0, 0)) {
+    this.center.rotate(theta, origin);
+  }
 }
