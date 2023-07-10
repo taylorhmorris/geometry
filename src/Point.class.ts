@@ -32,7 +32,7 @@ export class Point {
    * @beta
    */
   public static from(other: Point | PointArray): Point {
-    if (other instanceof Point) return Point.copy(other);
+    if (other instanceof Point) return Point.from(other);
     return new Point(other[0], other[1]);
   }
   /**
@@ -49,7 +49,7 @@ export class Point {
     theta: number,
     origin: Point = new Point(0, 0),
   ): Point {
-    const copy = Point.copy(point);
+    const copy = Point.from(point);
     copy.rotate(theta, origin);
     return copy;
   }

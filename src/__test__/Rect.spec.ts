@@ -396,7 +396,7 @@ describe('RectPA', () => {
   describe('Copy', () => {
     test('creates equal rect', () => {
       const rect = new Rect(10, 20, 30, 40);
-      const other = Rect.copy(rect);
+      const other = Rect.from(rect);
       expect(other).toEqual(rect);
       expect(other).not.toBe(rect);
     });

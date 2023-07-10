@@ -23,7 +23,7 @@ describe('constructor', () => {
 describe('static', () => {
   test('can be copied', () => {
     const vec = new Vector(3, 5);
-    const vec2 = Vector.copy(vec);
+    const vec2 = Vector.from(vec);
     expect(vec2.x).toBe(3);
     expect(vec2.y).toBe(5);
     vec.x = 6;
