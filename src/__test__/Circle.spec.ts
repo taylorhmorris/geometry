@@ -48,4 +48,30 @@ describe('rotate', () => {
     expect(circle.x).toBeCloseTo(0);
     expect(circle.y).toBeCloseTo(0);
   });
+
+  describe('collideCircle', () => {
+    test('collides with overlapping circles', () => {
+      const circle1 = new Circle([1, 1], 10);
+      const circle2 = new Circle([1, 1], 10);
+      expect(circle1.collideCircle(circle2)).toBe(true);
+    });
+
+    test('collides with partially overlapping circles', () => {
+      const circle1 = new Circle([1, 1], 10);
+      const circle2 = new Circle([2, 2], 10);
+      expect(circle1.collideCircle(circle2)).toBe(true);
+    });
+
+    test('does not collide with non-overlapping circles', () => {
+      const circle1 = new Circle([1, 1], 1);
+      const circle2 = new Circle([5, 5], 1);
+      expect(circle1.collideCircle(circle2)).toBe(false);
+    });
+
+    test('does not collide with non-overlapping circles with overlapping x', () => {
+      const circle1 = new Circle([1, 1], 1);
+      const circle2 = new Circle([1, 50], 1);
+      expect(circle1.collideCircle(circle2)).toBe(false);
+    });
+  });
 });
