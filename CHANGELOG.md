@@ -25,6 +25,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
+- Circle.collideCircle now properly detects collisions.
 
 ### Deprecated
 
