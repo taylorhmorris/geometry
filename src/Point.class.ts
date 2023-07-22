@@ -57,7 +57,6 @@ export class Point {
   /**
    * Rotates the given point by theta around a given origin
    *
-   * @param point the point to rotate
    * @param theta the amount in radians to rotate
    * @param origin the origin to rotate around (default: (0, 0))
    *
