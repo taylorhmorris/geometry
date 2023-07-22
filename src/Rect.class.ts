@@ -4,8 +4,9 @@ import { PointArray } from './PointArray.type';
 import { Vector } from './Vector.class';
 
 /**
- * A class for Rectangles
+ * A class for axis-aligned Rectangles.
  *
+ * @
  * @alpha
  */
 export class Rect {
@@ -39,6 +40,22 @@ export class Rect {
    */
   public static from(other: Rect): Rect {
     return new Rect(other.x, other.y, other._width, other._height, other.angle);
+  }
+
+  /**
+   * Creates a new {@link Rect} rotated from the given {@link Rect}.
+   * 
+   * @param rect the {@link Rect} to rotate
+   * @param theta the amount in radians to rotate
+   * @param origin the origin to rotate around (default: (0, 0))
+   *
+   * @returns a new {@link Rect} rotated around the given {@link Point}
+   * @alpha
+   */
+  public static rotate(rect: Rect, theta: number, origin: Point = new Point(0, 0)): Rect {
+    const copy = Rect.from(rect);
+    copy.rotate(theta, origin);
+    return copy;
   }
 
   /**
@@ -376,5 +393,19 @@ export class Rect {
     } else {
       this.center = position;
     }
+  }
+
+   /**
+   * Rotates the {@link Rect} by theta around a given origin
+   *
+   * @param theta the amount in radians to rotate
+   * @param origin the origin {@link Point} to rotate around (default: Rect.center))
+   *
+   * @alpha
+   */
+  public rotate(theta: number, origin: Point = new Point(this.x, this.y)) {
+    const centerPoint = Point.from(this.center);
+    centerPoint.rotate(theta, origin);
+    this.angle += theta;
   }
 }
