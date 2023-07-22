@@ -403,9 +403,11 @@ export class Rect {
    *
    * @alpha
    */
-  public rotate(theta: number, origin: Point = new Point(this.x, this.y)) {
+  public rotate(theta: number, origin: Point | PointArray = new Point(this.x, this.y)) {
     const centerPoint = Point.from(this.center);
     centerPoint.rotate(theta, origin);
+    this.x = centerPoint.x;
+    this.y = centerPoint.y;
     this.angle += theta;
   }
 }

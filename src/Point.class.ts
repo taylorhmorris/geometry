@@ -71,7 +71,10 @@ export class Point {
    *
    * @alpha
    */
-  public rotate(theta: number, origin: Point = new Point(0, 0)) {
+  public rotate(theta: number, origin: Point | PointArray = new Point(0, 0)) {
+    if (origin instanceof Array) {
+      origin = new Point(...origin);
+    }
     const cos = Math.cos(theta);
     const sin = Math.sin(theta);
     this.x -= origin.x;

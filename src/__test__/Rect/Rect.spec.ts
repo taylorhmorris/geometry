@@ -1,8 +1,8 @@
 import { test, describe, expect } from 'vitest';
 
-import { Rect } from '../Rect.class';
-import { Vector } from '../Vector.class';
-import { Face } from '../Face.enum';
+import { Rect } from '../../Rect.class';
+import { Vector } from '../../Vector.class';
+import { Face } from '../../Face.enum';
 
 test('creates', () => {
   const rect = new Rect(5, 10, 15, 20);
