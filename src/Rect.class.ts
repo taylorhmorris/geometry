@@ -144,14 +144,32 @@ export class Rect {
   }
 
   /**
+   * @deprecated use {@link Rect.centerPoint} and {@link Point.array} instead.
+   * Will be replaced by centerPoint in the future.
+   * 
    * The center of the {@link Rect}
    */
   public get center(): PointArray {
     return [this.x, this.y];
   }
-  public set center(value: PointArray) {
-    this.x = value[0];
-    this.y = value[1];
+  public set center(value: Point | PointArray) {
+    if (value instanceof Array) {
+      this.x = value[0];
+      this.y = value[1];
+    } else {
+      this.x = value.x;
+      this.y = value.y;
+    }
+  }
+
+  /**
+   * The center of the {@link Rect} as a {@link Point}.
+   */
+  public get centerPoint(): Point {
+    return new Point(this.x, this.y);
+  }
+  public set centerPoint(value: Point | PointArray) {
+    this.center = value;
   }
 
   /**
