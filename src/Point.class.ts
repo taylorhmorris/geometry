@@ -54,6 +54,15 @@ export class Point {
     return copy;
   }
 
+  /** The Point as a {@link PointArray}. */
+  public get array(): PointArray {
+    return [this.x, this.y];
+  }
+  public set array(point: PointArray) {
+    this.x = point[0];
+    this.y = point[1];
+  }
+
   /**
    * Rotates the given point by theta around a given origin
    *
