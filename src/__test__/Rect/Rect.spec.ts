@@ -120,26 +120,6 @@ test('grows', () => {
 
 describe('collisions', () => {
   const rect = new Rect(10, 15, 2, 4);
-  test('x', () => {
-    expect(rect.collideX(1)).toBe(false);
-    expect(rect.collideX(8.9)).toBe(false);
-    expect(rect.collideX(9)).toBe(true);
-    expect(rect.collideX(10)).toBe(true);
-    expect(rect.collideX(11)).toBe(true);
-    expect(rect.collideX(11.1)).toBe(false);
-  });
-
-  test('y', () => {
-    expect(rect.collideY(1)).toBe(false);
-    expect(rect.collideY(12.9)).toBe(false);
-    expect(rect.collideY(13)).toBe(true);
-    expect(rect.collideY(14)).toBe(true);
-    expect(rect.collideY(15)).toBe(true);
-    expect(rect.collideY(16)).toBe(true);
-    expect(rect.collideY(17)).toBe(true);
-    expect(rect.collideY(17.1)).toBe(false);
-  });
-
   test('xy', () => {
     expect(rect.collideXY(1, 1)).toBe(false);
     expect(rect.collideXY(1, 12.9)).toBe(false);

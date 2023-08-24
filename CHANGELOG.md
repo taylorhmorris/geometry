@@ -43,6 +43,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Rect.collisionFace
 - Rect.alignToFace
 - Rect.alignTo
+- Rect.collideX
+- Rect.collideY
 
 ### Security
 - Update Chaijs, postcss, and vite to address vulnerabilities

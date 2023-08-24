@@ -234,7 +234,7 @@ export class Rect {
    *
    * @beta
    */
-  public collideX(x: number): boolean {
+  private collideX(x: number): boolean {
     return this.left <= x && this.right >= x;
   }
 
@@ -246,7 +246,7 @@ export class Rect {
    *
    * @beta
    */
-  public collideY(y: number): boolean {
+  private collideY(y: number): boolean {
     return this.top <= y && this.bottom >= y;
   }
 
