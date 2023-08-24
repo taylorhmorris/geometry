@@ -2,6 +2,7 @@ import { test, describe, expect } from 'vitest';
 
 import { Circle } from '../Circle.class';
 import { Point } from '../Point.class';
+import { Rect } from '../Rect.class';
 
 describe('creates', () => {
   test('should have correct x, y, and radius', () => {
@@ -49,6 +50,13 @@ describe('rotate', () => {
     expect(circle.y).toBeCloseTo(0);
   });
 
+  test('rotates', () => {
+    const circ = new Circle([1.5, 1.5], 0.05);
+    circ.rotate(-Math.PI / 4);
+    expect(circ.x).toBeCloseTo(2.12);
+    expect(circ.y).toBeCloseTo(0);
+  });
+
   describe('collideCircle', () => {
     test('collides with overlapping circles', () => {
       const circle1 = new Circle([1, 1], 10);
@@ -73,5 +81,53 @@ describe('rotate', () => {
       const circle2 = new Circle([1, 50], 1);
       expect(circle1.collideCircle(circle2)).toBe(false);
     });
+  });
+});
+
+describe('collideRect', () => {
+  test('circle in rect should return true', () => {
+    const circ = new Circle([5, 5], 0.5);
+    const rect = new Rect(5, 5, 2, 2, 0);
+    expect(circ.collideRect(rect)).toBe(true);
+  });
+  test('rect in circle should return true', () => {
+    const circ = new Circle([5, 5], 10);
+    const rect = new Rect(5, 5, 2, 2, 0);
+    expect(circ.collideRect(rect)).toBe(true);
+  });
+  test('rect away from circle should return false', () => {
+    const circ = new Circle([50, 50], 10);
+    const rect = new Rect(5, 5, 2, 2, 0);
+    expect(circ.collideRect(rect)).toBe(false);
+  });
+  test('rect overlap circle should return true', () => {
+    const circ = new Circle([5, 5], 5);
+    const rect = new Rect(-2, 5, 4, 2, 0);
+    expect(circ.collideRect(rect)).toBe(true);
+  });
+  test('circle overlap rect corner should return true', () => {
+    const circ = new Circle([8, 8], 1);
+    const rect = new Rect(5, 5, 4, 4, 0);
+    expect(circ.collideRect(rect)).toBe(true);
+  });
+  test('circle overlap rect corner should return false if rotated out', () => {
+    const circ = new Circle([1.5, 1.5], 0.1);
+    const rect = new Rect(0, 0, 4, 4, Math.PI / 4);
+    expect(circ.collideRect(rect)).toBe(false);
+  });
+  test('circle overlap rect corner should return true', () => {
+    const circ = new Circle([1.5, 1.5], 0.1);
+    const rect = new Rect(0, 0, 4, 4, 0);
+    expect(circ.collideRect(rect)).toBe(true);
+  });
+  test('circle overlap rect outside origin corner should return false if rotated out', () => {
+    const circ = new Circle([6.5, 6.5], 0.1);
+    const rect = new Rect(5, 5, 4, 4, Math.PI / 4);
+    expect(circ.collideRect(rect)).toBe(false);
+  });
+  test('circle overlap rect outside origin corner should return true', () => {
+    const circ = new Circle([6.5, 6.5], 0.1);
+    const rect = new Rect(5, 5, 4, 4, 0);
+    expect(circ.collideRect(rect)).toBe(true);
   });
 });

@@ -131,15 +131,33 @@ export class Circle {
     return this.collideX(x) && this.collideY(y);
   }
 
+
   /**
-   * Checks if the {@link Circle} collides with a given {@link Rect}
+   * Checks if the {@link Circle} collides with a given rotated {@link Rect}
    *
    * @param rect a {@link Rect}
    * @returns `true` or `false`
    *
    * @beta
    */
-  public collideRect(rect: Rect): boolean {
+  private collideRotatedRect(rect: Rect): boolean {
+    const undoRotation = -rect.angle;
+    const newRect = rect.copy();
+    newRect.rotate(undoRotation, [0, 0]);
+    const newCircle = this.copy();
+    newCircle.rotate(undoRotation, new Point(0, 0));
+    return newCircle.collideUnrotatedRect(newRect);
+  }
+
+  /**
+   * Checks if the {@link Circle} collides with a given unrotated {@link Rect}
+   *
+   * @param rect a {@link Rect}
+   * @returns `true` or `false`
+   *
+   * @beta
+   */
+  private collideUnrotatedRect(rect: Rect): boolean {
     const circleDistanceX = Math.abs(this.x - rect.x);
     const circleDistanceY = Math.abs(this.y - rect.y);
     if (circleDistanceX > rect.width / 2 + this.radius) return false;
@@ -151,6 +169,19 @@ export class Circle {
       (2 + (circleDistanceY - rect.height / 2)) ^
       2;
     return cornerDistanceSq <= (this._radius ^ 2);
+  }
+
+  /**
+   * Checks if the {@link Circle} collides with a given {@link Rect}
+   *
+   * @param rect a {@link Rect}
+   * @returns `true` or `false`
+   *
+   * @beta
+   */
+  public collideRect(rect: Rect): boolean {
+    if (rect.angle) return this.collideRotatedRect(rect);
+    return this.collideUnrotatedRect(rect);
   }
 
   /**
