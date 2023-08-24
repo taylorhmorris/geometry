@@ -32,7 +32,7 @@ export class Point {
    * @beta
    */
   public static from(other: Point | PointArray): Point {
-    if (other instanceof Point) return Point.from(other);
+    if (other instanceof Point) return new Point(other.x, other.y);
     return new Point(other[0], other[1]);
   }
   /**
