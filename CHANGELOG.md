@@ -28,11 +28,13 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.x and Circle.y are now getters and setters for Circle.center
 - Circle constructor now takes a Point or PointArray
 - Rect.collide now supports rotated Rects
-
+- Circle.collideRect now accounts for rotation
+- Rect.collideXY now accounts for rotation
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
 - Circle.collideCircle now properly detects collisions.
+- Point.from infinite recursion
 
 ### Deprecated
 
