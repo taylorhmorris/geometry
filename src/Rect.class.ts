@@ -260,6 +260,11 @@ export class Rect {
    * @beta
    */
   public collideXY(x: number, y: number): boolean {
+    if (this.angle) {
+      const newPoint = new Point(x, y);
+      newPoint.rotate(-this.angle);
+      return this.collideX(newPoint.x) && this.collideY(newPoint.y);
+    }
     return this.collideX(x) && this.collideY(y);
   }
 

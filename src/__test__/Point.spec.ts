@@ -27,6 +27,11 @@ describe('Point', () => {
     point.rotate(Math.PI, new Point(0.5, 0.5));
     expect(point.x).toBeCloseTo(0);
     expect(point.y).toBeCloseTo(0);
+
+    const newPoint = new Point(0.6, 0.6);
+    newPoint.rotate(-Math.PI / 4);
+    expect(newPoint.x).toBeCloseTo(0.848);
+    expect(newPoint.y).toBeCloseTo(0);
   });
 
   test('can return a PointArray', () => {
