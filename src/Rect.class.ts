@@ -44,7 +44,7 @@ export class Rect {
 
   /**
    * Creates a new {@link Rect} rotated from the given {@link Rect}.
-   * 
+   *
    * @param rect the {@link Rect} to rotate
    * @param theta the amount in radians to rotate
    * @param origin the origin to rotate around (default: (0, 0))
@@ -52,7 +52,11 @@ export class Rect {
    * @returns a new {@link Rect} rotated around the given {@link Point}
    * @alpha
    */
-  public static rotate(rect: Rect, theta: number, origin: Point = new Point(0, 0)): Rect {
+  public static rotate(
+    rect: Rect,
+    theta: number,
+    origin: Point = new Point(0, 0),
+  ): Rect {
     const copy = Rect.from(rect);
     copy.rotate(theta, origin);
     return copy;
@@ -146,7 +150,7 @@ export class Rect {
   /**
    * @deprecated use {@link Rect.centerPoint} and {@link Point.array} instead.
    * Will be replaced by centerPoint in the future.
-   * 
+   *
    * The center of the {@link Rect}
    */
   public get center(): PointArray {
@@ -413,7 +417,7 @@ export class Rect {
     }
   }
 
-   /**
+  /**
    * Rotates the {@link Rect} by theta around a given origin
    *
    * @param theta the amount in radians to rotate
@@ -421,7 +425,10 @@ export class Rect {
    *
    * @alpha
    */
-  public rotate(theta: number, origin: Point | PointArray = new Point(this.x, this.y)) {
+  public rotate(
+    theta: number,
+    origin: Point | PointArray = new Point(this.x, this.y),
+  ) {
     const centerPoint = Point.from(this.center);
     centerPoint.rotate(theta, origin);
     this.x = centerPoint.x;

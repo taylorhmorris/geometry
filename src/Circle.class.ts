@@ -157,14 +157,14 @@ export class Circle {
    * Checks if two {@link Circle}s collide
    * @param other another {@link Circle}
    * @returns if the {@link Circle}s collide
-   * 
+   *
    * @alpha
    */
   public collideCircle(other: Circle): boolean {
     const dx = this.x - other.x;
     const dy = this.y - other.y;
-    const distranceSq = dx**2 + dy**2;
-    return distranceSq < ((this.radius + other.radius)**2);
+    const distranceSq = dx ** 2 + dy ** 2;
+    return distranceSq < (this.radius + other.radius) ** 2;
   }
 
   /**

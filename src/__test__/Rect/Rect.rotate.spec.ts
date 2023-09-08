@@ -8,8 +8,8 @@ describe('Rect.rotate', () => {
     rect.rotate(Math.PI / 2);
     expect(rect.angle).toEqual(Math.PI / 2);
     rect.rotate(Math.PI / 3);
-    expect(rect.angle).toBeCloseTo(5 * Math.PI / 6, 14);
-    expect(rect.angle).not.toBeCloseTo(11 * Math.PI / 12, 14);
+    expect(rect.angle).toBeCloseTo((5 * Math.PI) / 6, 14);
+    expect(rect.angle).not.toBeCloseTo((11 * Math.PI) / 12, 14);
   });
   test('moves center', () => {
     let rect = new Rect(10, 20, 30, 40);
