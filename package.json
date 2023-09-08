@@ -26,16 +26,16 @@
   "author": "Taylor H. Morris",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.15.11",
+    "@types/node": "^20.5.9",
     "@vitest/coverage-c8": "^0.29.8",
-    "eslint": "^8.37.0",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.7",
-    "typedoc": "^0.23.28",
-    "typescript": "^5.0.3",
-    "vite": "^4.2.1",
-    "vite-plugin-dts": "^2.3.0",
-    "vitest": "^0.29.8"
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3",
+    "typedoc": "^0.25.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.3",
+    "vitest": "^0.34.4"
   },
   "files": [
     "dist"
