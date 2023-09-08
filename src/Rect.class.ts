@@ -197,6 +197,7 @@ export class Rect {
   }
 
   /**
+   * @deprecated use {@link Rect.centerPoint} and {@link Point.array} instead.
    * The position of the {@link Rect} (equivalent to {@link Rect.center})
    */
   public get position(): PointArray {
@@ -205,6 +206,26 @@ export class Rect {
   public set position(value: PointArray) {
     this.x = value[0];
     this.y = value[1];
+  }
+
+  /**
+   * The position of the {@link Rect} (equivalent to {@link Rect.center})
+   */
+  public get points(): [Point, Point, Point, Point] {
+    const top_left = new Point(this.left, this.top);
+    const top_right = new Point(this.right, this.top);
+    const bottom_left = new Point(this.left, this.bottom);
+    const bottom_right = new Point(this.right, this.bottom);
+    const points: [Point, Point, Point, Point] = [
+      top_left,
+      top_right,
+      bottom_right,
+      bottom_left,
+    ];
+    for (const point of points) {
+      point.rotate(this.angle, this.center);
+    }
+    return points;
   }
 
   /**
@@ -276,7 +297,11 @@ export class Rect {
    *
    * @beta
    */
-  public collideRect(rect: Rect) {
+  public collideRect(rect: Rect): boolean {
+    const thisMaxDimension = Math.max(this._height, this._width);
+    const rectMaxDimension = Math.max(rect._height, rect._width);
+    if (Math.abs(this.x - rect.x) > thisMaxDimension + rectMaxDimension)
+      return false;
     return (
       rect.left < this.right &&
       rect.right > this.left &&
