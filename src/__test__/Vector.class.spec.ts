@@ -148,3 +148,19 @@ describe('direction', () => {
     });
   });
 });
+
+describe('dotProduct', () => {
+  test('with 90deg angle should be zero', () => {
+    const v1 = new Vector(0, 5);
+    const v2 = new Vector(5, 0);
+    expect(v1.dotProduct(v2)).toBe(0);
+    expect(v2.dotProduct(v1)).toBe(0);
+  });
+
+  test('-6, 8 and 5, 12 should be 66', () => {
+    const v1 = new Vector(-6, 8);
+    const v2 = new Vector(5, 12);
+    expect(v1.dotProduct(v2)).toBe(66);
+    expect(v2.dotProduct(v1)).toBe(66);
+  });
+});

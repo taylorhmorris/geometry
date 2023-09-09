@@ -92,4 +92,8 @@ export class Vector {
     this.x = newX;
     this.y = newY;
   }
+
+  public dotProduct(other: Vector): number {
+    return this.x * other.x + this.y * other.y;
+  }
 }
