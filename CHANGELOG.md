@@ -14,6 +14,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Point.from now accepts PointArray
 - Rect.rotate
 - Point.array
+- Rect.centerPoint
+- Rect.points
+- Vector.dotProduct
 
 ### Changed
 
@@ -24,6 +27,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.center is now a point
 - Circle.x and Circle.y are now getters and setters for Circle.center
 - Circle constructor now takes a Point or PointArray
+- Rect.collide now supports rotated Rects
+
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
@@ -35,6 +40,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - static Circle.copy
 - static Vector.copy
 - static Rect.copy
+- Rect.collisionFace
+- Rect.alignToFace
+- Rect.alignTo
 
 ## [0.0.6] - 2023-05-30
 
