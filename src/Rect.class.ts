@@ -4,9 +4,8 @@ import { PointArray } from './PointArray.type';
 import { Vector } from './Vector.class';
 
 /**
- * A class for axis-aligned Rectangles.
+ * A class for Rectangles.
  *
- * @
  * @alpha
  */
 export class Rect {
@@ -290,6 +289,75 @@ export class Rect {
   }
 
   /**
+   * Checks if a {@link Rect} overlaps the {@link Rect} on a given axis
+   * @param other another {@link Rect}
+   * @returns the magnitude of the overlap
+   * @beta
+   */
+  private singleAxisOverlap(
+    other: Readonly<Rect>,
+    axis: Readonly<Vector>,
+  ): number {
+    const thisPoints = this.points;
+    const otherPoints = other.points;
+    const localAxis = Vector.from(axis);
+    localAxis.magnitude = 1;
+    let thisMin = localAxis.dotProduct(thisPoints[0]);
+    let thisMax = thisMin;
+    let otherMin = localAxis.dotProduct(otherPoints[0]);
+    let otherMax = otherMin;
+    for (const point of thisPoints) {
+      const dot = localAxis.dotProduct(point);
+      thisMin = Math.min(thisMin, dot);
+      thisMax = Math.max(thisMax, dot);
+    }
+    for (const point of otherPoints) {
+      const dot = localAxis.dotProduct(point);
+      otherMin = Math.min(otherMin, dot);
+      otherMax = Math.max(otherMax, dot);
+    }
+    if (thisMin > otherMax || otherMin > thisMax) return 0;
+    const overlap1 = thisMin - otherMax;
+    const overlap2 = thisMax - otherMax;
+    if (Math.abs(overlap1) < Math.abs(overlap2)) return overlap1;
+    return overlap2;
+  }
+  /**
+   * Checks if two {@link Rect}s overlap
+   *
+   * @param other another {@link Rect}
+   * @returns the magnitude of the overlap
+   *
+   * @beta
+   */
+  public overlapRect(other: Readonly<Rect>): number {
+    const thisPoints = this.points;
+    const otherPoints = other.points;
+    const axes: Vector[] = [];
+    for (let i = 0; i < thisPoints.length - 1; i++) {
+      axes.push(
+        new Vector(
+          -(thisPoints[i + 1].y - thisPoints[i].y),
+          thisPoints[i + 1].x - thisPoints[i].x,
+        ),
+      );
+    }
+    for (let i = 0; i < otherPoints.length - 1; i++) {
+      axes.push(
+        new Vector(
+          -(otherPoints[i + 1].y - otherPoints[i].y),
+          otherPoints[i + 1].x - otherPoints[i].x,
+        ),
+      );
+    }
+    let smallestOverlap = 0;
+    for (const axis of axes) {
+      const overlap = -Math.abs(this.singleAxisOverlap(other, axis));
+      smallestOverlap = Math.min(smallestOverlap, overlap);
+    }
+    return smallestOverlap;
+  }
+  /**
    * Checks if two {@link Rect}s collide.
    * Assumes they are both unrotated
    *
@@ -317,52 +385,11 @@ export class Rect {
   public collideRect(other: Rect): boolean {
     if (this.angle === 0 && other.angle === 0)
       return this.collideRectSimple(other);
-
-    const thisPoints = this.points;
-    const otherPoints = other.points;
-
-    const axes: Vector[] = [];
-    for (let i = 0; i < thisPoints.length - 1; i++) {
-      axes.push(
-        new Vector(
-          -(thisPoints[i + 1].y - thisPoints[i].y),
-          thisPoints[i + 1].x - thisPoints[i].x,
-        ),
-      );
-    }
-    for (let i = 0; i < otherPoints.length - 1; i++) {
-      axes.push(
-        new Vector(
-          -(otherPoints[i + 1].y - otherPoints[i].y),
-          otherPoints[i + 1].x - otherPoints[i].x,
-        ),
-      );
-    }
-
-    for (const axis of axes) {
-      axis.magnitude = 1;
-      let thisMin = axis.dotProduct(thisPoints[0]);
-      let thisMax = thisMin;
-      let otherMin = axis.dotProduct(otherPoints[0]);
-      let otherMax = otherMin;
-      for (const point of thisPoints) {
-        const dot = axis.dotProduct(point);
-        thisMin = Math.min(thisMin, dot);
-        thisMax = Math.max(thisMax, dot);
-      }
-      for (const point of otherPoints) {
-        const dot = axis.dotProduct(point);
-        otherMin = Math.min(otherMin, dot);
-        otherMax = Math.max(otherMax, dot);
-      }
-      if (thisMin > otherMax || otherMin > thisMax) return false;
-    }
-
-    return true;
+    return this.overlapRect(other) !== 0;
   }
 
   /**
-   *
+   * @deprecated not reliable with rotated Rect. Will be removed in future release
    * @param rect another {@link Rect}
    * @param moveVector the movement {@link Vector}
    * @returns
@@ -393,6 +420,7 @@ export class Rect {
   }
 
   /**
+   * @deprecated not reliable with rotated Rect. Will be removed in future release
    * Align the {@link Rect} to a specific face of another {@link Rect}
    * @param other the other {@link Rect}
    * @param face the face to align
@@ -400,6 +428,7 @@ export class Rect {
    * @alpha
    */
   public alignToFace(other: Rect, face: Face) {
+    other.angle = 0;
     switch (face) {
       case Face.TOP: {
         this.bottom = other.top;
@@ -421,9 +450,11 @@ export class Rect {
         break;
       }
     }
+    other.rotate(this.angle, this.centerPoint);
   }
 
   /**
+   * @deprecated not reliable with rotated Rect. Will be removed in future release
    * Align the {@link Rect} to another {@link Rect} along a line
    * @param other the other {@link Rect}
    * @param direction the direction to move the {@link Rect}
