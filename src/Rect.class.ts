@@ -290,24 +290,75 @@ export class Rect {
   }
 
   /**
-   * Checks if two {@link Rect}s collide
+   * Checks if two {@link Rect}s collide.
+   * Assumes they are both unrotated
    *
-   * @param rect another {@link Rect}
+   * @param other another {@link Rect}
    * @returns `true` or `false`
    *
    * @beta
    */
-  public collideRect(rect: Rect): boolean {
-    const thisMaxDimension = Math.max(this._height, this._width);
-    const rectMaxDimension = Math.max(rect._height, rect._width);
-    if (Math.abs(this.x - rect.x) > thisMaxDimension + rectMaxDimension)
-      return false;
+  private collideRectSimple(other: Rect): boolean {
     return (
-      rect.left < this.right &&
-      rect.right > this.left &&
-      rect.top < this.bottom &&
-      rect.bottom > this.top
+      other.left < this.right &&
+      other.right > this.left &&
+      other.top < this.bottom &&
+      other.bottom > this.top
     );
+  }
+  /**
+   * Checks if two {@link Rect}s collide
+   *
+   * @param other another {@link Rect}
+   * @returns `true` or `false`
+   *
+   * @beta
+   */
+  public collideRect(other: Rect): boolean {
+    if (this.angle === 0 && other.angle === 0)
+      return this.collideRectSimple(other);
+
+    const thisPoints = this.points;
+    const otherPoints = other.points;
+
+    const axes: Vector[] = [];
+    for (let i = 0; i < thisPoints.length - 1; i++) {
+      axes.push(
+        new Vector(
+          -(thisPoints[i + 1].y - thisPoints[i].y),
+          thisPoints[i + 1].x - thisPoints[i].x,
+        ),
+      );
+    }
+    for (let i = 0; i < otherPoints.length - 1; i++) {
+      axes.push(
+        new Vector(
+          -(otherPoints[i + 1].y - otherPoints[i].y),
+          otherPoints[i + 1].x - otherPoints[i].x,
+        ),
+      );
+    }
+
+    for (const axis of axes) {
+      axis.magnitude = 1;
+      let thisMin = axis.dotProduct(thisPoints[0]);
+      let thisMax = thisMin;
+      let otherMin = axis.dotProduct(otherPoints[0]);
+      let otherMax = otherMin;
+      for (const point of thisPoints) {
+        const dot = axis.dotProduct(point);
+        thisMin = Math.min(thisMin, dot);
+        thisMax = Math.max(thisMax, dot);
+      }
+      for (const point of otherPoints) {
+        const dot = axis.dotProduct(point);
+        otherMin = Math.min(otherMin, dot);
+        otherMax = Math.max(otherMax, dot);
+      }
+      if (thisMin > otherMax || otherMin > thisMax) return false;
+    }
+
+    return true;
   }
 
   /**

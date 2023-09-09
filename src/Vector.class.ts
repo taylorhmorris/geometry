@@ -1,3 +1,5 @@
+import { Point } from './Point.class';
+
 /**
  * A class for a `Vector`
  *
@@ -93,7 +95,7 @@ export class Vector {
     this.y = newY;
   }
 
-  public dotProduct(other: Vector): number {
+  public dotProduct(other: Vector | Point): number {
     return this.x * other.x + this.y * other.y;
   }
 }
