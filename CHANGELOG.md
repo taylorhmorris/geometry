@@ -44,6 +44,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Rect.alignToFace
 - Rect.alignTo
 
+### Security
+- Update Chaijs, postcss, and vite to address vulnerabilities
+
 ## [0.0.6] - 2023-05-30
 
 ### Added
