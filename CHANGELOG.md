@@ -14,6 +14,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.collidePoint
 - Rect.perimeter
 - Rect.area
+- Vector.crossProduct
 
 ## [0.0.8] - 2024-01-08
 

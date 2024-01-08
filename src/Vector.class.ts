@@ -98,4 +98,14 @@ export class Vector {
   public dotProduct(other: Vector | Point): number {
     return this.x * other.x + this.y * other.y;
   }
+
+  /**
+   * Returns the cross product of the {@link Vector} and another {@link Vector}
+   * @param other the other {@link Vector}
+   * @returns the cross product
+   * @beta
+   */
+  public crossProduct(other: Vector | Point): number {
+    return this.x * other.y - this.y * other.x;
+  }
 }
