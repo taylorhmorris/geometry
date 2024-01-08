@@ -155,3 +155,23 @@ describe('area', () => {
     expect(circ.area).toBeCloseTo(Math.PI * 49);
   });
 });
+
+describe('collidePoint', () => {
+  test('collides with point inside circle', () => {
+    const circ = new Circle([0, 0], 1);
+    const point = new Point(0.5, 0.5);
+    expect(circ.collidePoint(point)).toBe(true);
+  });
+
+  test('collides with point on circle', () => {
+    const circ = new Circle([0, 0], 1);
+    const point = new Point(1, 0);
+    expect(circ.collidePoint(point)).toBe(true);
+  });
+
+  test('does not collide with point outside circle', () => {
+    const circ = new Circle([0, 0], 1);
+    const point = new Point(1.5, 0);
+    expect(circ.collidePoint(point)).toBe(false);
+  });
+});

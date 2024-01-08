@@ -197,6 +197,18 @@ export class Circle {
   }
 
   /**
+   * Checks if the {@link Circle} collides with a given {@link Point}
+   * @param point a {@link Point}
+   * @returns `true` or `false`
+   */
+  public collidePoint(point: Point): boolean {
+    const dx = this.x - point.x;
+    const dy = this.y - point.y;
+    const distanceSq = dx ** 2 + dy ** 2;
+    return distanceSq <= this.radius ** 2;
+  }
+
+  /**
    * Rotates the circle by theta around a given origin
    *
    * @param theta the amount in radians to rotate
