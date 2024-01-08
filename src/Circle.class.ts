@@ -32,8 +32,7 @@ export class Circle {
   /**
    * The constructor of the {@link Circle} class
    *
-   * @param x the x position of the {@link Circle}
-   * @param y the y position of the {@link Circle}
+   * @param center the center Point of the {@link Circle}
    * @param radius the radius of the {@link Circle}
    */
   constructor(center: Point | PointArray, radius: number) {
@@ -130,7 +129,6 @@ export class Circle {
   public collideXY(x: number, y: number): boolean {
     return this.collideX(x) && this.collideY(y);
   }
-
 
   /**
    * Checks if the {@link Circle} collides with a given rotated {@link Rect}
