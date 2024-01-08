@@ -7,6 +7,24 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.0.8] - 2024-01-08
+
+### Changed
+
+- Circle.collideRect now accounts for rotation
+- Rect.collideXY now accounts for rotation
+
+### Fixed
+
+- Point.from infinite recursion
+
+### Deprecated
+
+- Rect.collideX
+- Rect.collideY
+
+## [0.0.7] - 2023-09-09
+
 ### Added
 
 - rotation angle for Rect
@@ -28,13 +46,10 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.x and Circle.y are now getters and setters for Circle.center
 - Circle constructor now takes a Point or PointArray
 - Rect.collide now supports rotated Rects
-- Circle.collideRect now accounts for rotation
-- Rect.collideXY now accounts for rotation
 
 ### Fixed
 - static Circle.from now properly returns a new Circle.
 - Circle.collideCircle now properly detects collisions.
-- Point.from infinite recursion
 
 ### Deprecated
 
@@ -45,8 +60,6 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Rect.collisionFace
 - Rect.alignToFace
 - Rect.alignTo
-- Rect.collideX
-- Rect.collideY
 
 ### Security
 - Update Chaijs, postcss, and vite to address vulnerabilities
@@ -95,10 +108,12 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.6...HEAD
-[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.5...v0.0.6
-[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.4...v0.0.5
-[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.3...v0.0.4
-[0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.2...v0.0.3
+[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.8...HEAD
+[0.0.8]: https://github.com/tmorris42/geometry/compare/v0.0.7...v0.0.8
+[0.0.7]: https://github.com/tmorris42/geometry/compare/v0.0.6...v0.0.7
+[0.0.6]: https://github.com/tmorris42/geometry/compare/v0.0.5...v0.0.6
+[0.0.5]: https://github.com/tmorris42/geometry/compare/v0.0.4...v0.0.5
+[0.0.4]: https://github.com/tmorris42/geometry/compare/v0.0.3...v0.0.4
+[0.0.3]: https://github.com/tmorris42/geometry/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/tmorris42/geometry/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/tmorris42/geometry/releases/tag/v0.0.1
