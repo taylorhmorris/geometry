@@ -12,6 +12,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Circle.circumference
 - Circle.area
 - Circle.collidePoint
+- Rect.perimeter
+- Rect.area
 
 ## [0.0.8] - 2024-01-08
 

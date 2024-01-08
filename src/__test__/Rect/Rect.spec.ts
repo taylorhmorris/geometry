@@ -400,3 +400,17 @@ describe('RectPA', () => {
     expect(rect.center).toEqual([56, 57]);
   });
 });
+
+describe('perimeter', () => {
+  test('returns perimeter', () => {
+    const rect = new Rect(10, 20, 30, 40);
+    expect(rect.perimeter).toBe(140);
+  });
+});
+
+describe('area', () => {
+  test('returns area', () => {
+    const rect = new Rect(10, 20, 30, 40);
+    expect(rect.area).toBe(1200);
+  });
+});

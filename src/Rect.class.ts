@@ -547,4 +547,22 @@ export class Rect {
     this.y = centerPoint.y;
     this.angle += theta;
   }
+
+  /**
+   * Calculates the perimeter of the {@link Rect}
+   *
+   * @returns the perimeter of the {@link Rect}
+   */
+  public get perimeter(): number {
+    return 2 * (this.width + this.height);
+  }
+
+  /**
+   * Calculates the area of the {@link Rect}
+   *
+   * @returns the area of the {@link Rect}
+   */
+  public get area(): number {
+    return this.width * this.height;
+  }
 }
