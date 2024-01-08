@@ -131,3 +131,27 @@ describe('collideRect', () => {
     expect(circ.collideRect(rect)).toBe(true);
   });
 });
+
+describe('circumference', () => {
+  test('returns correct circumference', () => {
+    const circ = new Circle([0, 0], 1);
+    expect(circ.circumference).toBeCloseTo(2 * Math.PI);
+  });
+
+  test('returns correct circumference', () => {
+    const circ = new Circle([0, 0], 7);
+    expect(circ.circumference).toBeCloseTo(2 * Math.PI * 7);
+  });
+});
+
+describe('area', () => {
+  test('returns correct area', () => {
+    const circ = new Circle([0, 0], 1);
+    expect(circ.area).toBeCloseTo(Math.PI);
+  });
+
+  test('returns correct are', () => {
+    const circ = new Circle([0, 0], 7);
+    expect(circ.area).toBeCloseTo(Math.PI * 49);
+  });
+});

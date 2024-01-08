@@ -207,4 +207,20 @@ export class Circle {
   public rotate(theta: number, origin: Point = new Point(0, 0)) {
     this.center.rotate(theta, origin);
   }
+
+  /**
+   * Calculates the circumference of the {@link Circle}
+   * @returns the circumference
+   */
+  public get circumference(): number {
+    return 2 * Math.PI * this.radius;
+  }
+
+  /**
+   * Calculates the area of the {@link Circle}
+   * @returns the area
+   */
+  public get area(): number {
+    return Math.PI * this.radius ** 2;
+  }
 }

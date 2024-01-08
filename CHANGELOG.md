@@ -7,6 +7,11 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Circle.circumference
+- Circle.area
+
 ## [0.0.8] - 2024-01-08
 
 ### Changed
