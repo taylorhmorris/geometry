@@ -7,6 +7,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.0.9] - 2024-01-19
+
 ### Added
 
 - Circle.circumference
@@ -117,7 +119,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.8...HEAD
+[unreleased]: https://github.com/tmorris42/geometry/compare/v0.0.9...HEAD
+[0.0.9]: https://github.com/tmorris42/geometry/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/tmorris42/geometry/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/tmorris42/geometry/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/tmorris42/geometry/compare/v0.0.5...v0.0.6
