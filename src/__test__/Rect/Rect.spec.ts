@@ -3,6 +3,7 @@ import { test, describe, expect } from 'vitest';
 import { Rect } from '../../Rect.class';
 import { Vector } from '../../Vector.class';
 import { Face } from '../../Face.enum';
+import { Point } from '../../Point.class';
 
 test('creates', () => {
   const rect = new Rect(5, 10, 15, 20);
@@ -51,6 +52,16 @@ describe('collidePointArray', () => {
     const rect = new Rect(1, 2, 1, 1);
     expect(rect.collidePointArray([0, 0])).toBe(false);
     expect(rect.collidePointArray([1.3, 1.8])).toBe(true);
+  });
+});
+
+describe('collidePoint', () => {
+  test('detects collision', () => {
+    const rect = new Rect(1, 2, 1, 1);
+    const pointA = new Point(0, 0);
+    const pointB = new Point(1.3, 1.8);
+    expect(rect.collidePoint(pointA)).toBe(false);
+    expect(rect.collidePoint(pointB)).toBe(true);
   });
 });
 
