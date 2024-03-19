@@ -5,3 +5,5 @@ export { Rect } from './Rect.class';
 export { Vector } from './Vector.class';
 
 export type { PointArray } from './PointArray.type';
+
+export { newRect } from './utils/newRect';
