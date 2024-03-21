@@ -19,12 +19,6 @@ describe('Rect', () => {
     expect(rect.angle).toBe(Math.PI / 2);
   });
 
-  test('copy', () => {
-    const copy = Rect.copy(rect);
-    expect(copy).not.toBe(rect);
-    expect(copy).toEqual(rect);
-  });
-
   test('from', () => {
     const from = Rect.from(rect);
     expect(from).not.toBe(rect);
@@ -42,8 +36,8 @@ describe('Rect', () => {
     expect(rect).toEqual(other);
   });
 
-  test('copy (instance method)', () => {
-    const copy = rect.copy();
+  test('clone', () => {
+    const copy = rect.clone();
     expect(copy).not.toBe(rect);
     expect(copy).toEqual(rect);
   });
@@ -62,7 +56,7 @@ describe('Rect', () => {
     expect(rect.bottom).toBe(10);
 
     rect.center = [1, 1];
-    expect(rect.center).toEqual([1, 1]);
+    expect(rect.center.array).toEqual([1, 1]);
 
     rect.centerPoint = new Point(2, 2);
     expect(rect.centerPoint).toEqual(new Point(2, 2));
@@ -72,9 +66,6 @@ describe('Rect', () => {
 
     rect.height = 15;
     expect(rect.height).toBe(15);
-
-    rect.position = [3, 3];
-    expect(rect.position).toEqual([3, 3]);
   });
 
   // Add more tests as needed for other methods
