@@ -7,6 +7,10 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Fixed
+
+- Rect.collidePoint incorrectly handling rotation
+
 ## [0.0.10] - 2025-03-15
 
 ### Security
