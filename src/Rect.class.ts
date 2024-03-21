@@ -1,8 +1,10 @@
+import { Circle } from './Circle.class';
 import { Face } from './Face.enum';
 import { Point } from './Point.class';
 import { PointArray } from './PointArray.type';
 import { Vector } from './Vector.class';
 import { pointIntersectsRect } from './utils/pointIntersectsRect';
+import { shapeIntersectsRect } from './utils/shapeIntersectsShape';
 
 /**
  * A class for Rectangles.
@@ -537,5 +539,14 @@ export class Rect {
    */
   public get area(): number {
     return this.width * this.height;
+  }
+
+  /**
+   * Checks for intersection with another shape
+   * @param other the other shape to check for intersection
+   * @returns `true` if the shapes intersect, `false` otherwise
+   */
+  public intersects(other: Rect | Point | PointArray | Circle): boolean {
+    return shapeIntersectsRect(other, this);
   }
 }
