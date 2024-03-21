@@ -2,6 +2,7 @@ import { Face } from './Face.enum';
 import { Point } from './Point.class';
 import { PointArray } from './PointArray.type';
 import { Vector } from './Vector.class';
+import { pointIntersectsRect } from './utils/pointIntersectsRect';
 
 /**
  * A class for Rectangles.
@@ -261,9 +262,7 @@ export class Rect {
    */
   public collideXY(x: number, y: number): boolean {
     if (this.angle) {
-      const newPoint = new Point(x, y);
-      newPoint.rotate(-this.angle);
-      return this.collideX(newPoint.x) && this.collideY(newPoint.y);
+      return pointIntersectsRect([x, y], this);
     }
     return this.collideX(x) && this.collideY(y);
   }
