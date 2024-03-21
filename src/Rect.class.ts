@@ -20,17 +20,6 @@ export class Rect {
   angle: number;
 
   /**
-   * Constructs a new copy of a given {@link Rect}
-   *
-   * @param other {@link Rect} to copy
-   * @returns the new copy of the given {@link Rect}
-   *
-   * @deprecated Use {@link Rect.from} instead.
-   */
-  public static copy(other: Rect): Rect {
-    return Rect.from(other);
-  }
-  /**
    * Constructs a new {@link Rect} from a given {@link Rect}
    *
    * @param other {@link Rect} to copy
@@ -50,7 +39,7 @@ export class Rect {
    * @param origin the origin to rotate around (default: (0, 0))
    *
    * @returns a new {@link Rect} rotated around the given {@link Point}
-   * @alpha
+   * @deprecated use {@link Rect#rotate} instead. Will be removed in v0.0.11.
    */
   public static rotate(
     rect: Rect,
@@ -100,8 +89,19 @@ export class Rect {
     this._height = other._height;
     this.angle = other.angle;
   }
+
+  /**
+   * Creates a deep copy of the {@link Rect}
+   * @returns a new {@link Rect} with the same properties as the original
+   */
+  public clone(): Rect {
+    return Rect.from(this);
+  }
+
   /**
    * @returns a copy of the {@link Rect}
+   *
+   * @deprecated use {@link Rect.clone} instead. Will be removed in v0.0.11.
    */
   public copy(): Rect {
     return Rect.from(this);
@@ -148,13 +148,14 @@ export class Rect {
   }
 
   /**
-   * @deprecated use {@link Rect.centerPoint} and {@link Point.array} instead.
-   * Will be replaced by centerPoint in the future.
+   * Get the center of the {@link Rect} as a {@link Point}.
    *
-   * The center of the {@link Rect}
+   * (use {@link Rect.center}.{@link Point.array} to get the center as a {@link PointArray}).
+   *
+   * @returns the center of the {@link Rect}
    */
-  public get center(): PointArray {
-    return [this.x, this.y];
+  public get center(): Point {
+    return new Point(this.x, this.y);
   }
   public set center(value: Point | PointArray) {
     if (value instanceof Array) {
@@ -168,6 +169,8 @@ export class Rect {
 
   /**
    * The center of the {@link Rect} as a {@link Point}.
+   *
+   * @deprecated use {@link Rect.center} instead. Will be removed in v0.0.11.
    */
   public get centerPoint(): Point {
     return new Point(this.x, this.y);
@@ -197,19 +200,7 @@ export class Rect {
   }
 
   /**
-   * @deprecated use {@link Rect.centerPoint} and {@link Point.array} instead.
-   * The position of the {@link Rect} (equivalent to {@link Rect.center})
-   */
-  public get position(): PointArray {
-    return [this.x, this.y];
-  }
-  public set position(value: PointArray) {
-    this.x = value[0];
-    this.y = value[1];
-  }
-
-  /**
-   * The position of the {@link Rect} (equivalent to {@link Rect.center})
+   * The points of the {@link Rect} as an array of {@link Point}s
    */
   public get points(): [Point, Point, Point, Point] {
     const top_left = new Point(this.left, this.top);
@@ -233,7 +224,7 @@ export class Rect {
    * @param x the x coordinate to check
    * @returns `true` or `false`
    *
-   * @beta
+   * @deprecated Will be removed in v0.0.11
    */
   private collideX(x: number): boolean {
     return this.left <= x && this.right >= x;
@@ -245,7 +236,7 @@ export class Rect {
    * @param y the y coordinate to check
    * @returns `true` or `false`
    *
-   * @beta
+   * @deprecated Will be removed in v0.0.11
    */
   private collideY(y: number): boolean {
     return this.top <= y && this.bottom >= y;
@@ -258,7 +249,7 @@ export class Rect {
    * @param y the y coordinate to check
    * @returns `true` or `false`
    *
-   * @beta
+   * @deprecated Will be removed in v0.0.11
    */
   public collideXY(x: number, y: number): boolean {
     if (this.angle) {
@@ -273,7 +264,7 @@ export class Rect {
    * @param point the {@link PointArray} to check
    * @returns `true` or `false`
    *
-   * @beta
+   * @deprecated Will be removed in v0.0.11
    */
   public collidePointArray(point: PointArray): boolean {
     return this.collideXY(point[0], point[1]);
@@ -283,13 +274,12 @@ export class Rect {
    * Checks if a {@link Point} touches the {@link Rect}
    *
    * @param point the {@link Point} to check
-   * @returns `true` or `false`
+   * @returns `true` if the point is inside the {@link Rect}, `false` otherwise
    *
    * @beta
    */
   public collidePoint(point: Point | PointArray): boolean {
-    if (point instanceof Point) return this.collideXY(point.x, point.y);
-    return this.collidePointArray(point);
+    return pointIntersectsRect(point, this);
   }
 
   /**
@@ -361,23 +351,7 @@ export class Rect {
     }
     return smallestOverlap;
   }
-  /**
-   * Checks if two {@link Rect}s collide.
-   * Assumes they are both unrotated
-   *
-   * @param other another {@link Rect}
-   * @returns `true` or `false`
-   *
-   * @beta
-   */
-  private collideRectSimple(other: Rect): boolean {
-    return (
-      other.left < this.right &&
-      other.right > this.left &&
-      other.top < this.bottom &&
-      other.bottom > this.top
-    );
-  }
+
   /**
    * Checks if two {@link Rect}s collide
    *
@@ -387,8 +361,14 @@ export class Rect {
    * @beta
    */
   public collideRect(other: Rect): boolean {
-    if (this.angle === 0 && other.angle === 0)
-      return this.collideRectSimple(other);
+    if (
+      this.x === other.x &&
+      this.y === other.y &&
+      this.width === other.width &&
+      this.height === other.height &&
+      this.angle === other.angle
+    )
+      return true;
     return this.overlapRect(other) !== 0;
   }
 
@@ -504,7 +484,6 @@ export class Rect {
    * @beta
    */
   public resizeAndRecenter(size: Point | PointArray) {
-    const center: PointArray = this.center;
     if (size instanceof Point) {
       this.width = size.x;
       this.height = size.y;
@@ -512,7 +491,6 @@ export class Rect {
       this.width = size[0];
       this.height = size[1];
     }
-    this.center = center;
   }
 
   /**
@@ -521,11 +499,7 @@ export class Rect {
    * @param position the new position
    */
   public teleportTo(position: Point | PointArray) {
-    if (position instanceof Point) {
-      this.center = [position.x, position.y];
-    } else {
-      this.center = position;
-    }
+    this.center = position;
   }
 
   /**

@@ -7,9 +7,25 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Rect.clone()
+
 ### Fixed
 
 - Rect.collidePoint incorrectly handling rotation
+
+### Removed
+
+- Rect.copy
+- Rect#position
+- Rect#collideRectSimple
+
+### Deprecated
+
+- Rect#copy
+- Rect#centerPoint
+
 
 ## [0.0.9] - 2024-01-19
 
