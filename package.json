@@ -1,6 +1,6 @@
 {
   "name": "@taylorhmorris/geometry",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A simple geometry package",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tmorris42/geometry.git"
+    "url": "https://github.com/taylorhmorris/geometry.git"
   },
   "author": "Taylor H. Morris",
   "license": "ISC",
