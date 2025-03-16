@@ -140,7 +140,7 @@ export class Circle {
    */
   private collideRotatedRect(rect: Rect): boolean {
     const undoRotation = -rect.angle;
-    const newRect = rect.copy();
+    const newRect = rect.clone();
     newRect.rotate(undoRotation, [0, 0]);
     const newCircle = this.copy();
     newCircle.rotate(undoRotation, new Point(0, 0));

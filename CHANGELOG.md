@@ -19,13 +19,19 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 ### Removed
 
 - Rect.copy
+- Rect#copy
 - Rect#position
 - Rect#collideRectSimple
-
-### Deprecated
-
-- Rect#copy
+- Rect.rotate
 - Rect#centerPoint
+- Rect.collideX
+- Rect.collideY
+- Rect.collideXY
+- Rect.collidePointArray
+- Rect.collisionFace
+- Rect.alignToFace
+- Rect.alignTo
+
 
 ## [0.0.10] - 2025-03-15
 
