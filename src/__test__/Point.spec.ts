@@ -59,3 +59,49 @@ describe('Point', () => {
     expect(pointArray2).toEqual([2, 7]);
   });
 });
+
+describe('Point.rotate', () => {
+  test('should rotate a point around the origin', () => {
+    const p = new Point(1, 0);
+    const a = Point.rotate(p, Math.PI / 2);
+    expect(p.x).toBe(1);
+    expect(p.y).toBe(0);
+    expect(a.x).toBeCloseTo(0);
+    expect(a.y).toBeCloseTo(1);
+  });
+
+  test('should rotate a point around a given origin', () => {
+    const p = new Point(1, 0);
+    const origin = new Point(1, 1);
+    const a = Point.rotate(p, Math.PI / 2, origin);
+    expect(p.x).toBe(1);
+    expect(p.y).toBe(0);
+    expect(a.x).toBeCloseTo(2);
+    expect(a.y).toBeCloseTo(1);
+  });
+});
+
+describe('point.collidePoint', () => {
+  test('should return true if two points are equal', () => {
+    const p1 = new Point(1, 2);
+    const p2 = new Point(1, 2);
+    expect(p1.collidePoint(p2)).toBe(true);
+  });
+
+  test('should return false if two points are not equal', () => {
+    const p1 = new Point(1, 2);
+    const p2 = new Point(3, 4);
+    expect(p1.collidePoint(p2)).toBe(false);
+  });
+
+  test('should return true if point collides with point array', () => {
+    const p = new Point(1, 2);
+    const pa: PointArray = [1, 2];
+    expect(p.collidePoint(pa)).toBe(true);
+  });
+  test('should return false if point does not collide with point array', () => {
+    const p = new Point(1, 2);
+    const pa: PointArray = [3, 4];
+    expect(p.collidePoint(pa)).toBe(false);
+  });
+});
