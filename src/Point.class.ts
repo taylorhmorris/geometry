@@ -17,13 +17,6 @@ export class Point {
   }
 
   /**
-   * @deprecated Use {@link Point.from} instead.
-   */
-  public static copy(other: Point | PointArray): Point {
-    return Point.from(other);
-  }
-
-  /**
    * Constructs a new Point from a given {@link Point} or {@link PointArray}
    *
    * @param other {@link Point} or {@link PointArray} to copy

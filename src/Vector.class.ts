@@ -15,17 +15,6 @@ export class Vector {
   }
 
   /**
-   * Constructs a new copy of a given {@link Vector}
-   *
-   * @param other {@link Vector} to copy
-   * @returns the new copy of the given {@link Vector}
-   *
-   * @deprecated Use {@link Vector.from} instead.
-   */
-  public static copy(other: Vector): Vector {
-    return Vector.from(other);
-  }
-  /**
    * Constructs a new {@link Vector} from a given {@link Vector}
    *
    * @param other {@link Vector} to copy

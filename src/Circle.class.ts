@@ -12,12 +12,6 @@ export class Circle {
   private _radius: number;
 
   /**
-   * @deprecated Use {@link Circle.from} instead.
-   */
-  public static copy(other: Circle): Circle {
-    return Circle.from(other);
-  }
-  /**
    * Constructs a new {@link Circle} from a given {@link Circle}
    *
    * @param other {@link Circle} to copy
