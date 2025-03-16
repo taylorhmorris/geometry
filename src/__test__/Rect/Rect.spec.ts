@@ -400,13 +400,13 @@ describe('RectPA', () => {
     });
   });
   test('resizeAndRecenter', () => {
-    let rect = new Rect(10, 20, 30, 40);
-    let center = [...rect.center];
+    const rect = new Rect(10, 20, 30, 40);
+    const center = [...rect.center];
     rect.resizeAndRecenter([20, 25]);
     expect(center).toEqual(rect.center);
   });
   test('teleportTo', () => {
-    let rect = new Rect(10, 20, 30, 40);
+    const rect = new Rect(10, 20, 30, 40);
     rect.teleportTo([56, 57]);
     expect(rect.center).toEqual([56, 57]);
   });
