@@ -31,6 +31,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Rect.collisionFace
 - Rect.alignToFace
 - Rect.alignTo
+- Circle.copy
+- Vector.copy
+- Point.copy
 
 
 ## [0.0.10] - 2025-03-15
