@@ -400,8 +400,8 @@ describe('RectPA', () => {
     });
   });
   test('resizeAndRecenter', () => {
-    let rect = new Rect(10, 20, 30, 40);
-    let center = [...rect.center.array];
+    const rect = new Rect(10, 20, 30, 40);
+    const center = [...rect.center.array];
     rect.resizeAndRecenter([20, 25]);
     expect(center).toEqual(rect.center.array);
   });

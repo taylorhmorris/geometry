@@ -106,4 +106,16 @@ export class Point {
   public copy(): Point {
     return Point.from(this);
   }
+
+  /**
+   * @returns true if the {@link Point} is equal to the given {@link Point} or {@link PointArray}
+   * @param other the {@link Point} or {@link PointArray} to compare
+   * @alpha
+   */
+  public collidePoint(other: Point | PointArray): boolean {
+    if (other instanceof Point) {
+      return this.x === other.x && this.y === other.y;
+    }
+    return this.x === other[0] && this.y === other[1];
+  }
 }
