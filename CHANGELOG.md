@@ -7,6 +7,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.0.11] - 2025-03-16
+
 ### Added
 
 - Rect.clone()
@@ -154,7 +156,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/taylorhmorris/geometry/compare/v0.0.10...HEAD
+[unreleased]: https://github.com/taylorhmorris/geometry/compare/v0.0.11...HEAD
+[0.0.11]: https://github.com/taylorhmorris/geometry/compare/v0.0.10...v0.0.11 
 [0.0.10]: https://github.com/taylorhmorris/geometry/compare/v0.0.9...v0.0.10 
 [0.0.9]: https://github.com/taylorhmorris/geometry/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/taylorhmorris/geometry/compare/v0.0.7...v0.0.8
