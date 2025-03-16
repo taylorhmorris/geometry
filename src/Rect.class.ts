@@ -486,13 +486,8 @@ export class Rect {
    * @beta
    */
   public resizeAndRecenter(size: Point | PointArray) {
-    if (size instanceof Point) {
-      this.width = size.x;
-      this.height = size.y;
-    } else {
-      this.width = size[0];
-      this.height = size[1];
-    }
+    this.width = size instanceof Point ? Math.abs(size.x) : Math.abs(size[0]);
+    this.height = size instanceof Point ? Math.abs(size.y) : Math.abs(size[1]);
   }
 
   /**

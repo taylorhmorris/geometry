@@ -405,6 +405,28 @@ describe('RectPA', () => {
     rect.resizeAndRecenter([20, 25]);
     expect(center).toEqual(rect.center.array);
   });
+  test('resizeAndRecenter with negative size', () => {
+    const rect = new Rect(10, 20, 30, 40);
+    const center = [...rect.center.array];
+    rect.resizeAndRecenter([-20, -25]);
+    expect(center).toEqual(rect.center.array);
+    expect(rect.width).toBe(20);
+    expect(rect.height).toBe(25);
+    expect(rect.x).toBe(10);
+    expect(rect.y).toBe(20);
+    expect(rect.left).toBe(0);
+    expect(rect.top).toBe(7.5);
+    expect(rect.right).toBe(20);
+    expect(rect.bottom).toBe(32.5);
+    expect(rect.center.array).toEqual([10, 20]);
+    expect(rect.centerPoint).toEqual(new Point(10, 20));
+  });
+  test('resizeAndRecenter with a Point', () => {
+    const rect = new Rect(10, 20, 30, 40);
+    const center = [...rect.center.array];
+    rect.resizeAndRecenter(new Point(20, 25));
+    expect(center).toEqual(rect.center.array);
+  });
   test('teleportTo', () => {
     const rect = new Rect(10, 20, 30, 40);
     rect.teleportTo([56, 57]);
