@@ -1,5 +1,4 @@
 import { Circle } from './Circle.class';
-import { Face } from './Face.enum';
 import { Point } from './Point.class';
 import { PointArray } from './PointArray.type';
 import { Vector } from './Vector.class';
@@ -31,26 +30,6 @@ export class Rect {
    */
   public static from(other: Rect): Rect {
     return new Rect(other.x, other.y, other._width, other._height, other.angle);
-  }
-
-  /**
-   * Creates a new {@link Rect} rotated from the given {@link Rect}.
-   *
-   * @param rect the {@link Rect} to rotate
-   * @param theta the amount in radians to rotate
-   * @param origin the origin to rotate around (default: (0, 0))
-   *
-   * @returns a new {@link Rect} rotated around the given {@link Point}
-   * @deprecated use {@link Rect#rotate} instead. Will be removed in v0.0.11.
-   */
-  public static rotate(
-    rect: Rect,
-    theta: number,
-    origin: Point = new Point(0, 0),
-  ): Rect {
-    const copy = Rect.from(rect);
-    copy.rotate(theta, origin);
-    return copy;
   }
 
   /**
@@ -97,15 +76,6 @@ export class Rect {
    * @returns a new {@link Rect} with the same properties as the original
    */
   public clone(): Rect {
-    return Rect.from(this);
-  }
-
-  /**
-   * @returns a copy of the {@link Rect}
-   *
-   * @deprecated use {@link Rect.clone} instead. Will be removed in v0.0.11.
-   */
-  public copy(): Rect {
     return Rect.from(this);
   }
 
@@ -170,18 +140,6 @@ export class Rect {
   }
 
   /**
-   * The center of the {@link Rect} as a {@link Point}.
-   *
-   * @deprecated use {@link Rect.center} instead. Will be removed in v0.0.11.
-   */
-  public get centerPoint(): Point {
-    return new Point(this.x, this.y);
-  }
-  public set centerPoint(value: Point | PointArray) {
-    this.center = value;
-  }
-
-  /**
    * The width of the {@link Rect}
    */
   public get width(): number {
@@ -219,57 +177,6 @@ export class Rect {
       point.rotate(this.angle, this.center);
     }
     return points;
-  }
-
-  /**
-   * Checks if an x coordinate crosses the {@link Rect}
-   * @param x the x coordinate to check
-   * @returns `true` or `false`
-   *
-   * @deprecated Will be removed in v0.0.11
-   */
-  private collideX(x: number): boolean {
-    return this.left <= x && this.right >= x;
-  }
-
-  /**
-   * Checks if a y coordinate crosses the {@link Rect}
-   *
-   * @param y the y coordinate to check
-   * @returns `true` or `false`
-   *
-   * @deprecated Will be removed in v0.0.11
-   */
-  private collideY(y: number): boolean {
-    return this.top <= y && this.bottom >= y;
-  }
-
-  /**
-   * Checks if an x, y coordinate touches the {@link Rect}
-   *
-   * @param x the x coordinate to check
-   * @param y the y coordinate to check
-   * @returns `true` or `false`
-   *
-   * @deprecated Will be removed in v0.0.11
-   */
-  public collideXY(x: number, y: number): boolean {
-    if (this.angle) {
-      return pointIntersectsRect([x, y], this);
-    }
-    return this.collideX(x) && this.collideY(y);
-  }
-
-  /**
-   * Checks if a {@link PointArray} touches the {@link Rect}
-   *
-   * @param point the {@link PointArray} to check
-   * @returns `true` or `false`
-   *
-   * @deprecated Will be removed in v0.0.11
-   */
-  public collidePointArray(point: PointArray): boolean {
-    return this.collideXY(point[0], point[1]);
   }
 
   /**
@@ -372,110 +279,6 @@ export class Rect {
     )
       return true;
     return this.overlapRect(other) !== 0;
-  }
-
-  /**
-   * @deprecated not reliable with rotated Rect. Will be removed in future release
-   * @param rect another {@link Rect}
-   * @param moveVector the movement {@link Vector}
-   * @returns
-   *
-   * @alpha
-   */
-  public collisionFace(
-    rect: Readonly<Rect>,
-    moveVector: Readonly<Vector>,
-  ): Face {
-    if (moveVector.y === 0 && moveVector.x == 0) {
-      return Face.NONE;
-    } else if (this.collideXY(rect.x, rect.y)) {
-      return Face.NONE;
-    }
-    const distX = rect.x - this.x;
-    const distY = rect.y - this.y;
-    if (Math.abs(distX) > Math.abs(distY)) {
-      if (distX < 0) {
-        return Face.LEFT;
-      }
-      return Face.RIGHT;
-    }
-    if (distY < 0) {
-      return Face.TOP;
-    }
-    return Face.BOTTOM;
-  }
-
-  /**
-   * @deprecated not reliable with rotated Rect. Will be removed in future release
-   * Align the {@link Rect} to a specific face of another {@link Rect}
-   * @param other the other {@link Rect}
-   * @param face the face to align
-   *
-   * @alpha
-   */
-  public alignToFace(other: Rect, face: Face) {
-    other.angle = 0;
-    switch (face) {
-      case Face.TOP: {
-        this.bottom = other.top;
-        break;
-      }
-      case Face.BOTTOM: {
-        this.top = other.bottom;
-        break;
-      }
-      case Face.RIGHT: {
-        this.left = other.right;
-        break;
-      }
-      case Face.LEFT: {
-        this.right = other.left;
-        break;
-      }
-      case Face.NONE: {
-        break;
-      }
-    }
-    other.rotate(this.angle, this.centerPoint);
-  }
-
-  /**
-   * @deprecated not reliable with rotated Rect. Will be removed in future release
-   * Align the {@link Rect} to another {@link Rect} along a line
-   * @param other the other {@link Rect}
-   * @param direction the direction to move the {@link Rect}
-   *
-   * @alpha
-   */
-  public alignTo(other: Rect, direction: [number, number] | Vector) {
-    let v: Vector;
-    if (direction instanceof Vector) {
-      v = direction;
-    } else {
-      v = new Vector(direction[0], direction[1]);
-    }
-
-    const m = Math.abs(v.y / v.x);
-
-    const distLR = this.left - other.right;
-    const distRL = this.right - other.left;
-    const distTB = this.top - other.bottom;
-    const distBT = this.bottom - other.top;
-
-    const distX = Math.abs(distLR) < Math.abs(distRL) ? distLR : distRL;
-    const distY = Math.abs(distTB) < Math.abs(distBT) ? distTB : distBT;
-
-    if (Math.abs(distX) < Math.abs(distY) && v.x != 0) {
-      this.x -= distX;
-      if (v.y && m) {
-        this.y -= distX * m;
-      }
-    } else if (Math.abs(distY) <= Math.abs(distX) && v.y != 0) {
-      this.y += -distY;
-      if (v.x && m) {
-        this.x += -distY / m;
-      }
-    }
   }
 
   /**
