@@ -10,6 +10,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 ### Added
 
 - Vector.toString method
+- Rect.toString method
 
 ## [0.0.11] - 2025-03-16
 

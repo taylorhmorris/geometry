@@ -178,3 +178,15 @@ describe('area', () => {
     expect(rect.area).toBe(1200);
   });
 });
+
+describe('toString', () => {
+  test('returns string', () => {
+    const rect = new Rect(10, 20, 30, 40);
+    expect(rect.toString()).toBe('Rect<10, 20, 30, 40, 0θ>');
+  });
+
+  test('returns string with angle', () => {
+    const rect = new Rect(10, 20, 30, 40, 1);
+    expect(rect.toString()).toBe('Rect<10, 20, 30, 40, 1θ>');
+  });
+});

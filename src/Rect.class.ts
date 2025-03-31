@@ -347,4 +347,11 @@ export class Rect {
   public intersects(other: Rect | Point | PointArray | Circle): boolean {
     return shapeIntersectsRect(other, this);
   }
+
+  /**
+   * @returns string representation of the {@link Rect}
+   */
+  public toString(): string {
+    return `Rect<${this.x}, ${this.y}, ${this.width}, ${this.height}, ${this.angle}θ>`;
+  }
 }
