@@ -12,6 +12,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Point.toString method
 - Vector.toString method
 - Rect.toString method
+- Circle.toString method
 
 ## [0.0.11] - 2025-03-16
 

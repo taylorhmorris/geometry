@@ -175,3 +175,10 @@ describe('collidePoint', () => {
     expect(circ.collidePoint(point)).toBe(false);
   });
 });
+
+describe('toString', () => {
+  test('returns string representation', () => {
+    const circ = new Circle([0, 0], 1);
+    expect(circ.toString()).toBe('Circle<0, 0, 1>');
+  });
+});

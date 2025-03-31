@@ -229,4 +229,11 @@ export class Circle {
   public get area(): number {
     return Math.PI * this.radius ** 2;
   }
+
+  /**
+   * @returns a string representation of the {@link Circle}
+   */
+  public toString(): string {
+    return `Circle<${this.x}, ${this.y}, ${this.radius}>`;
+  }
 }
