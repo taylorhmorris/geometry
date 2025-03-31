@@ -97,4 +97,11 @@ export class Vector {
   public crossProduct(other: Vector | Point): number {
     return this.x * other.y - this.y * other.x;
   }
+
+  /**
+   * @returns the string representation of the Vector
+   */
+  public toString(): string {
+    return `Vector<${this.x}, ${this.y}>`;
+  }
 }
