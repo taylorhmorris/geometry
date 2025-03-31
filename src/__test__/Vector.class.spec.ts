@@ -164,3 +164,10 @@ describe('dotProduct', () => {
     expect(v2.dotProduct(v1)).toBe(66);
   });
 });
+
+describe('toString', () => {
+  test('toString', () => {
+    const vec = new Vector(1, 2);
+    expect(vec.toString()).toBe('Vector<1, 2>');
+  });
+});
