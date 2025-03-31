@@ -9,6 +9,7 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ### Added
 
+- Point.toString method
 - Vector.toString method
 - Rect.toString method
 

@@ -111,4 +111,11 @@ export class Point {
     }
     return this.x === other[0] && this.y === other[1];
   }
+
+  /**
+   * @returns a string representation of the {@link Point}
+   */
+  public toString(): string {
+    return `Point<${this.x}, ${this.y}>`;
+  }
 }

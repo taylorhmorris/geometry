@@ -105,3 +105,10 @@ describe('point.collidePoint', () => {
     expect(p.collidePoint(pa)).toBe(false);
   });
 });
+
+describe('point.toString', () => {
+  test('should return a string representation of the point', () => {
+    const p = new Point(1, 2);
+    expect(p.toString()).toBe('Point<1, 2>');
+  });
+});
