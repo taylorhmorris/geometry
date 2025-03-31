@@ -116,9 +116,18 @@ describe('collisions', () => {
     const rect2 = new Rect(10, 15, 2, 4);
     expect(rect.collideRect(rect2)).toBe(true);
     rect2.right = rect.left;
-    expect(rect.collideRect(rect2)).toBe(true);
+    expect(rect.collideRect(rect2)).toBe(false);
     rect2.right -= 0.1;
     expect(rect.collideRect(rect2)).toBe(false);
+  });
+
+  test('regression', () => {
+    const rect = new Rect(26, 22, 2, 2);
+    const rect2 = new Rect(6, 22, 0.1, 0.1);
+    expect(rect.overlapRect(rect2)).toBe(0);
+    expect(rect2.overlapRect(rect)).toBe(0);
+    expect(rect.collideRect(rect2)).toBe(false);
+    expect(rect2.collideRect(rect)).toBe(false);
   });
 });
 

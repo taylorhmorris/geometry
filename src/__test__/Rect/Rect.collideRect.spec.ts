@@ -6,7 +6,7 @@ test('rect', () => {
   const rect2 = new Rect(10, 15, 2, 4);
   expect(rect.collideRect(rect2)).toBe(true);
   rect2.right = rect.left;
-  expect(rect.collideRect(rect2)).toBe(true);
+  expect(rect.collideRect(rect2)).toBe(false);
   rect2.right -= 0.1;
   expect(rect.collideRect(rect2)).toBe(false);
 });

@@ -253,9 +253,10 @@ export class Rect {
         ),
       );
     }
-    let smallestOverlap = 0;
+    let smallestOverlap = Infinity;
     for (const axis of axes) {
-      const overlap = -Math.abs(this.singleAxisOverlap(other, axis));
+      const overlap = Math.abs(this.singleAxisOverlap(other, axis));
+      if (overlap === 0) return 0;
       smallestOverlap = Math.min(smallestOverlap, overlap);
     }
     return smallestOverlap;
