@@ -355,4 +355,18 @@ export class Rect {
   public toString(): string {
     return `Rect<${this.x}, ${this.y}, ${this.width}, ${this.height}, ${this.angle}θ>`;
   }
+
+  /**
+   * @param other the other {@link Rect}
+   * @returns if the {@link Rect} is equal to another {@link Rect}
+   */
+  public equals(other: Rect): boolean {
+    return (
+      this.x === other.x &&
+      this.y === other.y &&
+      this.width === other.width &&
+      this.height === other.height &&
+      this.angle === other.angle
+    );
+  }
 }

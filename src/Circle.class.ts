@@ -236,4 +236,14 @@ export class Circle {
   public toString(): string {
     return `Circle<${this.x}, ${this.y}, ${this.radius}>`;
   }
+
+  /**
+   * @param other the other {@link Circle}
+   * @returns if the {@link Circle} is equal to another {@link Circle}
+   */
+  public equals(other: Circle): boolean {
+    return (
+      this.x === other.x && this.y === other.y && this.radius === other.radius
+    );
+  }
 }

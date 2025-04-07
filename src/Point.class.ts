@@ -118,4 +118,12 @@ export class Point {
   public toString(): string {
     return `Point<${this.x}, ${this.y}>`;
   }
+
+  /**
+   * @param other the other {@link Point}
+   * @returns true if the {@link Point} is equal to the given {@link Point}
+   */
+  public equals(other: Point): boolean {
+    return this.x === other.x && this.y === other.y;
+  }
 }
