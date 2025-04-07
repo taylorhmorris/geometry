@@ -5,7 +5,7 @@ import { Rect } from './Rect.class';
 /**
  * A class for Circles
  *
- * @alpha
+ * @beta
  */
 export class Circle {
   private _center: Point;
