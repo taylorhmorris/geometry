@@ -10,6 +10,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 ### Added
 
 - Vector.equals method
+- Rect.equals method
+- Point.equals method
+- Circle.equals method
 
 ## [0.0.12] - 2025-03-31
 
