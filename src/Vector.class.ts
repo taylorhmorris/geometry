@@ -104,4 +104,12 @@ export class Vector {
   public toString(): string {
     return `Vector<${this.x}, ${this.y}>`;
   }
+
+  /**
+   * @param other the other {@link Vector}
+   * @returns if the {@link Vector} is equal to another {@link Vector}
+   */
+  public equals(other: Vector): boolean {
+    return this.x === other.x && this.y === other.y;
+  }
 }

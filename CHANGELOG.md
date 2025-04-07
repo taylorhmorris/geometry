@@ -7,6 +7,10 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Vector.equals method
+
 ## [0.0.12] - 2025-03-31
 
 ### Added
