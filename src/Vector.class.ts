@@ -3,7 +3,7 @@ import { Point } from './Point.class';
 /**
  * A class for a `Vector`
  *
- * @alpha
+ * @beta
  */
 export class Vector {
   public x: number;

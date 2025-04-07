@@ -14,6 +14,10 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 - Point.equals method
 - Circle.equals method
 
+### Changed
+
+- Vector, Rect, Point, Circle are now beta
+
 ## [0.0.12] - 2025-03-31
 
 ### Added

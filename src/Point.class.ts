@@ -3,7 +3,7 @@ import { PointArray } from './PointArray.type';
 /**
  * A class for a `Point`
  *
- * @alpha
+ * @beta
  */
 export class Point {
   /** The x coordinate of the {@link Point} */

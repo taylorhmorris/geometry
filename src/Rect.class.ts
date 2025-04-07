@@ -8,7 +8,7 @@ import { shapeIntersectsRect } from './utils/shapeIntersectsShape';
 /**
  * A class for Rectangles.
  *
- * @alpha
+ * @beta
  */
 export class Rect {
   /** The x coordinate of the {@link Rect} */
