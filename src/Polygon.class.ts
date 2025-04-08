@@ -162,4 +162,12 @@ export class Polygon {
   public rotate(theta: number, origin: Point = new Point(0, 0)) {
     this._points.forEach((point) => point.rotate(theta, origin));
   }
+
+  /**
+   * @returns string representation of the {@link Polygon}
+   * @alpha
+   */
+  public toString(): string {
+    return `Polygon<${this._points.map((point) => point.toString()).join(', ')}>`;
+  }
 }
