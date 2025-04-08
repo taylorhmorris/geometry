@@ -7,6 +7,8 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+## [0.1.0] - 2025-04-08
+
 ### Added
 
 - Polygon class
@@ -186,8 +188,9 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 - Geometry library
 
-[unreleased]: https://github.com/taylorhmorris/geometry/compare/v0.0.12...HEAD
-[0.0.12]: https://github.com/taylorhmorris/geometry/compare/v0.0.10...v0.0.12
+[unreleased]: https://github.com/taylorhmorris/geometry/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/taylorhmorris/geometry/compare/v0.0.12...v0.1.0
+[0.0.12]: https://github.com/taylorhmorris/geometry/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/taylorhmorris/geometry/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/taylorhmorris/geometry/compare/v0.0.9...v0.0.10 
 [0.0.9]: https://github.com/taylorhmorris/geometry/compare/v0.0.8...v0.0.9
