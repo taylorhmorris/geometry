@@ -9,9 +9,11 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ### Added
 
+- Polygon class
 - Vector.equals method
 - Rect.equals method
 - Point.equals method
+- Point.distanceTo method
 - Circle.equals method
 
 ### Changed
