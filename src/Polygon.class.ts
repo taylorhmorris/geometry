@@ -73,7 +73,13 @@ export class Polygon {
    * @returns the area of the {@link Polygon}
    */
   public get area(): number {
-    throw new Error('Not implemented');
+    let area = 0;
+    for (let i = 0; i < this._points.length; i++) {
+      const p1 = this._points[i];
+      const p2 = this._points[(i + 1) % this._points.length];
+      area += p1.x * p2.y - p2.x * p1.y;
+    }
+    return Math.abs(area) / 2;
   }
 
   /**
