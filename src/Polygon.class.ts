@@ -1,3 +1,4 @@
+import { Rect } from './index';
 import { Point } from './Point.class';
 
 /**
@@ -103,12 +104,52 @@ export class Polygon {
   }
 
   /**
-   * Checks if a {@link Point} is inside the {@link Polygon}
+   * Checks if a {@link Point} collides with the {@link Polygon}
    * @param point the {@link Point} to check
-   * @returns `true` if the point is inside the {@link Polygon}, `false` otherwise
+   * @returns `true` if the point collides with the {@link Polygon}, `false` otherwise
    */
   public collidePoint(point: Point): boolean {
     if (!point) return false;
+    throw new Error('Not implemented');
+  }
+
+  /**
+   * Checks if a {@link Rect} collides with the {@link Polygon}
+   * @param rect the {@link Rect} to check
+   * @returns `true` if the {@link Rect} collides with the {@link Polygon}, `false` otherwise
+   */
+  public collideRect(rect: Rect): boolean {
+    if (!rect) return false;
+    throw new Error('Not implemented');
+  }
+
+  /**
+   * Checks if a {@link Polygon} collides with the {@link Polygon}
+   * @param polygon the {@link Polygon} to check
+   * @returns `true` if the {@link Polygon} collides with the {@link Polygon}, `false` otherwise
+   */
+  public collidePolygon(polygon: Polygon): boolean {
+    if (!polygon) return false;
+    throw new Error('Not implemented');
+  }
+
+  /**
+   * Checks if a {@link Circle} collides with the {@link Polygon}
+   * @param circle the {@link Circle} to check
+   * @returns `true` if the {@link Circle} collides with the {@link Polygon}, `false` otherwise
+   */
+  public collideCircle(circle: Polygon): boolean {
+    if (!circle) return false;
+    throw new Error('Not implemented');
+  }
+
+  /**
+   * Checks if another Shape collides with the {@link Polygon}
+   * @param shape the Shape to check
+   * @returns `true` if the Shape collides with the {@link Polygon}, `false` otherwise
+   */
+  public collide(shape: Polygon): boolean {
+    if (!shape) return false;
     throw new Error('Not implemented');
   }
 
