@@ -80,7 +80,13 @@ export class Polygon {
    * @returns the perimeter of the {@link Polygon}
    */
   public get perimeter(): number {
-    throw new Error('Not implemented');
+    let perimeter = 0;
+    for (let i = 0; i < this._points.length; i++) {
+      const p1 = this._points[i];
+      const p2 = this._points[(i + 1) % this._points.length];
+      perimeter += p1.distanceTo(p2);
+    }
+    return perimeter;
   }
 
   /**
