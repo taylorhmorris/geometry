@@ -126,4 +126,16 @@ export class Point {
   public equals(other: Point): boolean {
     return this.x === other.x && this.y === other.y;
   }
+
+  /**
+   * Calculates the distance between two {@link Point}s
+   * @param other the other {@link Point}
+   * @returns the distance between two {@link Point}s
+   * @alpha
+   */
+  public distanceTo(other: Point): number {
+    const dx = this.x - other.x;
+    const dy = this.y - other.y;
+    return Math.sqrt(dx ** 2 + dy ** 2);
+  }
 }

@@ -112,3 +112,36 @@ describe('point.toString', () => {
     expect(p.toString()).toBe('Point<1, 2>');
   });
 });
+
+describe('point.distanceTo', () => {
+  test('should return the distance to another point on the y-axis', () => {
+    const p1 = new Point(0, 0);
+    const p2 = new Point(0, 5);
+    expect(p1.distanceTo(p2)).toBeCloseTo(5);
+    expect(p2.distanceTo(p1)).toBeCloseTo(5);
+  });
+  test('should return the distance to another point on the x-axis', () => {
+    const p1 = new Point(0, 0);
+    const p2 = new Point(-7, 0);
+    expect(p1.distanceTo(p2)).toBeCloseTo(7);
+    expect(p2.distanceTo(p1)).toBeCloseTo(7);
+  });
+  test('should return the distance to another point on the diagonal', () => {
+    const p1 = new Point(0, 0);
+    const p2 = new Point(3, 4);
+    expect(p1.distanceTo(p2)).toBeCloseTo(5);
+    expect(p2.distanceTo(p1)).toBeCloseTo(5);
+  });
+  test('should return the distance to another point on the diagonal with negative coordinates', () => {
+    const p1 = new Point(-3, -4);
+    const p2 = new Point(0, 0);
+    expect(p1.distanceTo(p2)).toBeCloseTo(5);
+    expect(p2.distanceTo(p1)).toBeCloseTo(5);
+  });
+  test('should return 0 if points are equal', () => {
+    const p1 = new Point(0, 0);
+    const p2 = new Point(0, 0);
+    expect(p1.distanceTo(p2)).toBeCloseTo(0);
+    expect(p2.distanceTo(p1)).toBeCloseTo(0);
+  });
+});
