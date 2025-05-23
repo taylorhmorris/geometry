@@ -79,7 +79,29 @@ describe('Triangle', () => {
     ]);
     const centroid = triangle.centroid;
     expect(centroid.x).toBeCloseTo(2);
-    expect(centroid.y).toBeCloseTo(4 / 3);
+    expect(centroid.y).toBeCloseTo(1.3333);
+  });
+
+  it('has the correct centroid for [(-1, -3), (2, 1), (8, -4)]', () => {
+    const triangle = new Polygon([
+      new Point(-1, -3),
+      new Point(2, 1),
+      new Point(8, -4),
+    ]);
+    const centroid = triangle.centroid;
+    expect(centroid.x).toBeCloseTo(3);
+    expect(centroid.y).toBeCloseTo(-2);
+  });
+
+  it('has the correct centroid for [(0, 0), (0, 100), (133, 0)]', () => {
+    const triangle = new Polygon([
+      new Point(0, 0),
+      new Point(0, 100),
+      new Point(133, 0),
+    ]);
+    const centroid = triangle.centroid;
+    expect(centroid.x).toBeCloseTo(44.33);
+    expect(centroid.y).toBeCloseTo(33.33);
   });
 });
 
@@ -142,7 +164,9 @@ describe('Pentagon', () => {
   const h = 7.694;
   let x1_regular = -1.55;
   const y1_regular = Math.sqrt(Math.pow(a, 2) - Math.pow(x1_regular, 2));
-  const z1_regular = Math.sqrt(Math.pow(x1_regular, 2) + Math.pow(y1_regular, 2));
+  const z1_regular = Math.sqrt(
+    Math.pow(x1_regular, 2) + Math.pow(y1_regular, 2),
+  );
   expect(z1_regular).toBeCloseTo(a);
   x1_regular = -a / 2 + x1_regular;
   const regularPentagon = new Polygon([
@@ -178,16 +202,28 @@ describe('Pentagon', () => {
   });
 
   it('has the correct perimeter for a regular pentagon', () => {
-    expect(regularPentagon.points[0].distanceTo(regularPentagon.points[1])).toBeCloseTo(5);
-    expect(regularPentagon.points[1].distanceTo(regularPentagon.points[2])).toBeCloseTo(5);
-    expect(regularPentagon.points[2].distanceTo(regularPentagon.points[3])).toBeCloseTo(5);
-    expect(regularPentagon.points[3].distanceTo(regularPentagon.points[4])).toBeCloseTo(5);
-    expect(regularPentagon.points[4].distanceTo(regularPentagon.points[0])).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[0].distanceTo(regularPentagon.points[1]),
+    ).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[1].distanceTo(regularPentagon.points[2]),
+    ).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[2].distanceTo(regularPentagon.points[3]),
+    ).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[3].distanceTo(regularPentagon.points[4]),
+    ).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[4].distanceTo(regularPentagon.points[0]),
+    ).toBeCloseTo(5);
     expect(regularPentagon.perimeter).toBeCloseTo(25, 1);
   });
 
   it('has the correct area for a regular pentagon', () => {
-    expect(regularPentagon.points[0].distanceTo(regularPentagon.points[1])).toBeCloseTo(5);
+    expect(
+      regularPentagon.points[0].distanceTo(regularPentagon.points[1]),
+    ).toBeCloseTo(5);
     expect(regularPentagon.area).toBeCloseTo(43.01, 1);
   });
 
