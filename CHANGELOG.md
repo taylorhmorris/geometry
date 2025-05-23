@@ -7,6 +7,10 @@ and this project will adhere to [Semantic Versioning](https://semver.org/spec/v2
 
 ## [Unreleased]
 
+### Added
+
+- Implemented Polygon.centroid
+
 ### Security
 
 - Update vite (CVE-2025-32395)(GHSA-356w-63v5-8wf4)
