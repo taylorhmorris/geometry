@@ -100,7 +100,23 @@ export class Polygon {
    * @returns the centroid of the {@link Polygon}
    */
   public get centroid(): Point {
-    throw new Error('Not implemented');
+    const area = this.area;
+    if (area === 0) {
+      return new Point(0, 0);
+    }
+
+    let cx = 0;
+    let cy = 0;
+
+    for (let i = 0; i < this._points.length; i++) {
+      const p1 = this._points[i];
+      const p2 = this._points[(i + 1) % this._points.length];
+      const crossProduct = p1.x * p2.y - p2.x * p1.y;
+      cx += (p1.x + p2.x) * crossProduct;
+      cy += (p1.y + p2.y) * crossProduct;
+    }
+
+    return new Point(cx / (6 * area), cy / (6 * area));
   }
 
   /**

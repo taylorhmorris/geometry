@@ -70,6 +70,17 @@ describe('Triangle', () => {
     ]);
     expect(triangle.area).toBeCloseTo(6);
   });
+
+  it('has the correct centroid', () => {
+    const triangle = new Polygon([
+      new Point(0, 0),
+      new Point(3, 0),
+      new Point(3, 4),
+    ]);
+    const centroid = triangle.centroid;
+    expect(centroid.x).toBeCloseTo(2);
+    expect(centroid.y).toBeCloseTo(4 / 3);
+  });
 });
 
 describe('Rectangle', () => {
@@ -111,55 +122,112 @@ describe('Rectangle', () => {
     ]);
     expect(rectangle.area).toBeCloseTo(12);
   });
+
+  it('has the correct centroid', () => {
+    const rectangle = new Polygon([
+      new Point(0, 0),
+      new Point(4, 0),
+      new Point(4, 3),
+      new Point(0, 3),
+    ]);
+    const centroid = rectangle.centroid;
+    expect(centroid.x).toBeCloseTo(2);
+    expect(centroid.y).toBeCloseTo(1.5);
+  });
 });
 
 describe('Pentagon', () => {
+  // This pentagon is a regular pentagon and is used for perimeter and area tests.
   const a = 5;
   const h = 7.694;
-  let x1 = -1.55;
-  const y1 = Math.sqrt(Math.pow(a, 2) - Math.pow(x1, 2));
-  const z1 = Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2));
-  expect(z1).toBeCloseTo(a);
-  x1 = -a / 2 + x1;
-  const pentagon = new Polygon([
+  let x1_regular = -1.55;
+  const y1_regular = Math.sqrt(Math.pow(a, 2) - Math.pow(x1_regular, 2));
+  const z1_regular = Math.sqrt(Math.pow(x1_regular, 2) + Math.pow(y1_regular, 2));
+  expect(z1_regular).toBeCloseTo(a);
+  x1_regular = -a / 2 + x1_regular;
+  const regularPentagon = new Polygon([
     new Point(a / 2, 0),
     new Point(-a / 2, 0),
-    new Point(x1, y1),
+    new Point(x1_regular, y1_regular),
     new Point(0, h),
-    new Point(-x1, y1),
+    new Point(-x1_regular, y1_regular),
   ]);
+
+  // This pentagon is used for the centroid test as its coordinates are simpler.
+  const irregularPentagon = new Polygon([
+    new Point(0, 0),
+    new Point(2, 2),
+    new Point(1, 4),
+    new Point(-1, 4),
+    new Point(-2, 2),
+  ]);
+
   it('creates', () => {
-    const pentagon2 = new Polygon([
-      new Point(0, 0),
-      new Point(2, 2),
-      new Point(1, 4),
-      new Point(-1, 4),
-      new Point(-2, 2),
-    ]);
-    expect(pentagon2).toBeDefined();
-    expect(pentagon2.points.length).toBe(5);
-    expect(pentagon2.points[0].x).toBe(0);
-    expect(pentagon2.points[0].y).toBe(0);
-    expect(pentagon2.points[1].x).toBe(2);
-    expect(pentagon2.points[1].y).toBe(2);
-    expect(pentagon2.points[2].x).toBe(1);
-    expect(pentagon2.points[2].y).toBe(4);
-    expect(pentagon2.points[3].x).toBe(-1);
-    expect(pentagon2.points[3].y).toBe(4);
-    expect(pentagon2.points[4].x).toBe(-2);
-    expect(pentagon2.points[4].y).toBe(2);
+    expect(irregularPentagon).toBeDefined();
+    expect(irregularPentagon.points.length).toBe(5);
+    expect(irregularPentagon.points[0].x).toBe(0);
+    expect(irregularPentagon.points[0].y).toBe(0);
+    expect(irregularPentagon.points[1].x).toBe(2);
+    expect(irregularPentagon.points[1].y).toBe(2);
+    expect(irregularPentagon.points[2].x).toBe(1);
+    expect(irregularPentagon.points[2].y).toBe(4);
+    expect(irregularPentagon.points[3].x).toBe(-1);
+    expect(irregularPentagon.points[3].y).toBe(4);
+    expect(irregularPentagon.points[4].x).toBe(-2);
+    expect(irregularPentagon.points[4].y).toBe(2);
   });
 
-  it('has the correct perimeter', () => {
-    expect(pentagon.points[0].distanceTo(pentagon.points[1])).toBeCloseTo(5);
-    expect(pentagon.points[1].distanceTo(pentagon.points[2])).toBeCloseTo(5);
-    expect(pentagon.points[2].distanceTo(pentagon.points[3])).toBeCloseTo(5);
-    expect(pentagon.points[3].distanceTo(pentagon.points[4])).toBeCloseTo(5);
-    expect(pentagon.points[4].distanceTo(pentagon.points[0])).toBeCloseTo(5);
-    expect(pentagon.perimeter).toBeCloseTo(25, 1);
+  it('has the correct perimeter for a regular pentagon', () => {
+    expect(regularPentagon.points[0].distanceTo(regularPentagon.points[1])).toBeCloseTo(5);
+    expect(regularPentagon.points[1].distanceTo(regularPentagon.points[2])).toBeCloseTo(5);
+    expect(regularPentagon.points[2].distanceTo(regularPentagon.points[3])).toBeCloseTo(5);
+    expect(regularPentagon.points[3].distanceTo(regularPentagon.points[4])).toBeCloseTo(5);
+    expect(regularPentagon.points[4].distanceTo(regularPentagon.points[0])).toBeCloseTo(5);
+    expect(regularPentagon.perimeter).toBeCloseTo(25, 1);
   });
-  it('has the correct area', () => {
-    expect(pentagon.points[0].distanceTo(pentagon.points[1])).toBeCloseTo(5);
-    expect(pentagon.area).toBeCloseTo(43.01, 1);
+
+  it('has the correct area for a regular pentagon', () => {
+    expect(regularPentagon.points[0].distanceTo(regularPentagon.points[1])).toBeCloseTo(5);
+    expect(regularPentagon.area).toBeCloseTo(43.01, 1);
+  });
+
+  it('has the correct centroid for an irregular pentagon', () => {
+    const centroid = irregularPentagon.centroid;
+    expect(centroid.x).toBeCloseTo(0);
+    expect(centroid.y).toBeCloseTo(34 / 15); // 2.2666...
+  });
+});
+
+describe('Degenerate Polygons', () => {
+  it('returns (0,0) centroid for a line (zero area)', () => {
+    const line = new Polygon([new Point(1, 1), new Point(3, 3)]);
+    const centroid = line.centroid;
+    expect(line.area).toBeCloseTo(0);
+    expect(centroid.x).toBeCloseTo(0);
+    expect(centroid.y).toBeCloseTo(0);
+  });
+
+  it('returns (0,0) centroid for a single point (zero area)', () => {
+    const pointPolygon = new Polygon([new Point(5, 5)]);
+    const centroid = pointPolygon.centroid;
+    // Area for a single point polygon might be NaN or 0 depending on implementation,
+    // but centroid should be (0,0) as per requirement for zero area.
+    // Let's check if area is indeed 0 for our implementation.
+    expect(pointPolygon.area).toBeCloseTo(0);
+    expect(centroid.x).toBeCloseTo(0);
+    expect(centroid.y).toBeCloseTo(0);
+  });
+
+  it('returns (0,0) centroid for a polygon with collinear points (zero area)', () => {
+    const collinearPolygon = new Polygon([
+      new Point(0, 0),
+      new Point(1, 1),
+      new Point(2, 2),
+      new Point(3, 3),
+    ]);
+    const centroid = collinearPolygon.centroid;
+    expect(collinearPolygon.area).toBeCloseTo(0);
+    expect(centroid.x).toBeCloseTo(0);
+    expect(centroid.y).toBeCloseTo(0);
   });
 });
